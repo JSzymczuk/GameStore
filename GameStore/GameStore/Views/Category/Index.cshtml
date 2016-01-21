@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GameStore.ViewModels.CategoryListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Pełna nazwa kategorii<br />(wyśwetlana w menu na górze strony)
+        </th>
+        <th>
+            Skrócona nazwa kategorii<br />(wyśwetlana przy produktach)
+        </th>
+        <th>
+            Kategoria nadrzędna
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameShort)
+        </td>
+        <td>
+            @if (item.ParentId != null)
+            {
+                @Html.DisplayFor(modelItem => item.ParentName)
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "Update", new { id = item.Id })
+        </td>
+        <td>
+            @if (item.CanBeDeleted)
+            {
+                @Html.ActionLink("Usuń", "Delete", new { id = item.Id })
+            }
+        </td>
+    </tr>
+}
+
+</table>

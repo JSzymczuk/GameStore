@@ -1,0 +1,41 @@
+﻿@model IEnumerable<GameStore.ViewModels.PegiContentViewModel>
+
+<p>
+    @Html.ActionLink("Dodaj zawartość", "CreateContent")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>Treść</th>
+        <th>Informacje</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IconLink)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "UpdateContent", new { id = item.Id })
+            </td>
+            <td>
+                @if (item.CanBeDeleted)
+                {
+                    @Html.ActionLink("Usuń", "DeleteContent", new { id = item.Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

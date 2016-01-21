@@ -1,0 +1,45 @@
+﻿@model IEnumerable<GameStore.ViewModels.PegiRatingListItem>
+
+<p>
+    @Html.ActionLink("Dodaj ocenę wiekową", "CreateRating")
+</p>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>Treść</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IconLink)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @foreach (var ctnt in item.Content)
+            {
+                @Html.DisplayFor(tmp => ctnt.Name)
+                <br />
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edytuj", "UpdateRating", new { id = item.Id })
+        </td>
+        <td>
+            @if(item.CanBeDeleted)
+            { 
+                @Html.ActionLink("Usuń", "DeleteRating", new { id=item.Id })
+            }
+        </td>
+    </tr>
+}
+
+</table>

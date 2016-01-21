@@ -1,0 +1,150 @@
+﻿@model GameStore.ViewModels.ProductViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<main>
+    <div class="wrapper">
+        <div class="column">
+            @Html.Partial("~/Views/Shared/_AdminMenu.cshtml")
+        </div>
+    <div class="column">
+
+@using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
+{
+    <h2>Dodaj</h2>
+
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group"> 
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-input" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.CollectorEdition, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.CollectorEdition, htmlAttributes: new { @class = "form-label" })
+            @Html.CheckBoxFor(model => model.CollectorEdition, htmlAttributes: new { @class = "form-input" })
+            <span class="check-label"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Publisher, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.Publisher, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Publisher, htmlAttributes: new { @class = "form-input" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.PlatformId, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.PlatformId, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.PlatformId, Model.PlatformSelectList, new { @class = "form-input" })
+            <span class="check-label"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.GenreId, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.GenreId, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.GenreId, Model.GenreSelectList, new { @class = "form-input" })
+            <span class="check-label"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.PegiRatingId, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.PegiRatingId, htmlAttributes: new { @class = "form-label" })
+            @Html.DropDownListFor(model => model.PegiRatingId, Model.PegiSelectList, new { @class = "form-input" })
+            <span class="check-label"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.ReleaseDate, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.ReleaseDate, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.ReleaseDate, htmlAttributes: new { @class = "form-input", @type = "date" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.Language, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.Language, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.Language, htmlAttributes: new { @class = "form-input" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.BasePrice, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.BasePrice, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.BasePrice, htmlAttributes: new { @class = "form-input", @type = "number" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.DiscountPrice, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.DiscountPrice, htmlAttributes: new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.DiscountPrice, htmlAttributes: new { @class = "form-input", @type = "number" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-input" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReqMinimal, htmlAttributes: new { @class = "form-label" })
+        @Html.ValidationMessageFor(model => model.ReqMinimal, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(model => model.ReqMinimal, htmlAttributes: new { @class = "form-input" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ReqRecommended, htmlAttributes: new { @class = "form-label" })
+        @Html.ValidationMessageFor(model => model.ReqRecommended, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(model => model.ReqRecommended, htmlAttributes: new { @class = "form-input" })
+    </div>
+
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => model.CoverLarge, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => model.CoverLarge, htmlAttributes: new { @class = "form-label" })
+            <div class="file-upload-custom">
+                <input id="file-input-display" class="form-input" placeholder="Wybierz plik" disabled="disabled" />
+                <div class="file-upload-button">
+                    <span>Wyślij</span> 
+                    @Html.TextBoxFor(model => model.CoverLarge, new { @id = "file-upload-file", @type="file" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="form-input" type="submit">Dodaj</button>
+}
+            
+        </div>
+    </div>
+</main>
+
+<script>
+    document.getElementById("file-upload-file").onchange = function () {
+        document.getElementById("file-input-display").value = this.value;
+    };
+</script>

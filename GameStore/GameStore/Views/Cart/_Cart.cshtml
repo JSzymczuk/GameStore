@@ -1,0 +1,55 @@
+﻿@model GameStore.ViewModels.CartViewModel
+
+@{
+    AjaxOptions options = new AjaxOptions
+    {
+        //HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        //OnBegin = "$('#loading_modal').modal('show');",
+        //OnFailure = "$('#loading_modal').modal('hide');",
+        UpdateTargetId = "cart-content"
+    };
+}
+
+<table class="table">
+
+    @foreach (var item in Model.Products)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductCover)
+            </td>
+            <td>
+                @Html.ActionLink(item.ProductName, "Page", "Product", new { id = item.ProductId })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PlatformName)
+            </td>
+            <td>
+                @Html.TextBoxFor(modelItem => item.Quantity, new
+                {
+                    @id = "quant-" + item.ProductId,
+                    @type = "number",
+                    @min = "0",
+                    @max = "1000",
+                    @step = "1",
+                    @onchange = "changeQuantity(this, '" + item.ProductId + "');"
+                }) szt.
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)zł
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)zł
+            </td>
+            <td>
+                @Ajax.ActionLink("Usuń", "RemoveProduct", "Cart", new { id = item.ProductId }, options)
+            </td>
+        </tr>
+    }
+
+</table>
+
+Razem @Html.DisplayFor(model => Model.TotalPrice)zł za @Html.DisplayFor(model => Model.TotalProducts) towarów.
+
+@Ajax.ActionLink("Wyczyść koszyk", "DestroyCart", options)

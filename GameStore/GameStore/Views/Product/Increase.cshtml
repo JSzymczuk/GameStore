@@ -1,0 +1,46 @@
+﻿@model GameStore.ViewModels.IncreaseProductViewModel
+
+@{
+    ViewBag.Title = "Increase";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+<h2>Increase</h2>
+
+@using (Html.BeginForm("Increase", "Product", FormMethod.Post, new { enctype = "multipart/form-data", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>IncreaseProductViewModel</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        
+
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Model.Name
+
+        @Html.LabelFor(model => model.ProductCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Model.ProductCategory
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Remaining, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Remaining, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Remaining, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-default">Increase</button>
+            </div>
+        </div>
+    </div>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

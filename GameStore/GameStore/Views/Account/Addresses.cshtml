@@ -1,0 +1,48 @@
+﻿@model IEnumerable<GameStore.ViewModels.AddressViewModel>
+
+@{
+    ViewBag.Title = "Moje adresy";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Dodaj nowy", "AddAddress")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Adres
+        </th>
+        <th>
+            Dodatkowe operacje
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Street)
+            @Html.Raw(" ")
+            @Html.DisplayFor(modelItem => item.House)
+            @Html.Raw("/")
+            @Html.DisplayFor(modelItem => item.Local)
+            @Html.Raw(" ")
+            @Html.DisplayFor(modelItem => item.City)
+            @Html.Raw(", ")
+            @Html.DisplayFor(modelItem => item.Region)
+            @Html.Raw(" ")
+            @Html.DisplayFor(modelItem => item.PostalCode)
+            @Html.Raw(" ")
+            @Html.DisplayFor(modelItem => item.Post)
+        <td>
+            @Html.DisplayFor(modelItem => item.AdditionalInfo)
+        </td>
+        <td>
+            @Html.ActionLink("Usuń", "DeleteAddress", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

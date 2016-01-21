@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Mój koszyk";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div id="cart-content">
+    @Html.Action("GetCart")
+</div>
+
+@section Scripts {
+    <script>
+        function changeQuantity(sender, id) {
+            jQuery.ajax({
+                url: '@Url.Action("UpdateQuantity", "Cart")',
+                type: 'GET',
+                data: { productId: id, quantity: sender.value },
+                success: function (data, textStatus) {
+                    $("#cart-content").html(data);
+                },
+            });
+        }
+    </script>
+}

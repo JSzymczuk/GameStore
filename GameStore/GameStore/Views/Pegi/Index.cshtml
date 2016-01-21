@@ -1,0 +1,10 @@
+﻿@model GameStore.ViewModels.PegiIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.Partial("_PegiRatingList", Model.Rates)
+@Html.Partial("_PegiContentList", Model.Content)
