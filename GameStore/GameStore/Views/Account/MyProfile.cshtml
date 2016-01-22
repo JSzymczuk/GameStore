@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Mój profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="column">
+            @Html.Partial("_UserMenu")
+        </div>
+        <div class="column">
+            <div class="general-form">
+                <h2>@ViewBag.Title</h2>
+
+            </div>
+        </div>
+    </div>
+</main>
+

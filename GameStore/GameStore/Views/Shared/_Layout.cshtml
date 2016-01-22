@@ -7,6 +7,10 @@
     <link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CAlfa+Slab+One%7COpen+Sans:800%7CHammersmith+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css' />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
 <body>
     <nav class="upper-bar">
@@ -21,10 +25,17 @@
             </div>
             <div class="right">
                 <div class="cart">
-                    <a id="cart-link" href=""></a>
+                    <a id="cart-link" href='@Url.Action("Index", "Cart")'></a>
                 </div>
                 <div class="account">
-                    <a id="login-link" href=""></a>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <a id="login-link" href='@Url.Action("MyProfile", "Account")'></a>
+                    }
+                    else
+                    {
+                        <a id="login-link" href='@Url.Action("Login", "Account")'></a>
+                    }
                 </div>
             </div>
         </div>
