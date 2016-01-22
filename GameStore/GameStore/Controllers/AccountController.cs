@@ -20,6 +20,8 @@ namespace GameStore.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        #region fields and ctor
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -62,6 +64,20 @@ namespace GameStore.Controllers
             {
                 _userManager = value;
             }
+        }
+
+        #endregion
+
+        [Authorize]
+        public ActionResult MyProfile()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult MyAddresses()
+        {
+            return View();
         }
 
         //
@@ -225,7 +241,7 @@ namespace GameStore.Controllers
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Proszę zresetować hasło klikając <a href=\"" + callbackUrl + "\">tu</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

@@ -30,6 +30,16 @@ namespace GameStore.Controllers
 
         public ActionResult Index()
         {
+            if (!Request.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult MyOrder()
+        {
             return View();
         }
 
