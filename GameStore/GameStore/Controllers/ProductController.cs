@@ -161,6 +161,71 @@ namespace GameStore.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public PartialViewResult InitializeFilter(string keyword, Guid? platformId, Guid? genreId)
+        {
+            var filter = new ProductFilterModel();
+
+            filter.SearchKeyword = keyword ?? string.Empty;
+            filter.ProductSortType = ProductSortType.NameAscending;
+            filter.ProductSortTypes = GeneralHelper.SelectListForEnum(typeof(ProductSortType));
+
+            foreach (var platf in ProductManager.ProductCategories.OrderBy(c => c.Name))
+            {
+                filter.Platforms.Add(new SelectListItem 
+                { 
+                    Value = platf.Id.ToString(), 
+                    Text = platf.NameShort ?? platf.Name,
+                    Selected = platf.Id == platformId 
+                });
+            }
+            foreach (var genre in ProductManager.Genres.OrderBy(g => g.Name))
+            {
+                filter.Genres.Add(new SelectListItem
+                {
+                    Value = genre.Id.ToString(),
+                    Text = genre.Name,
+                    Selected = genre.Id == genreId
+                });
+            }
+            foreach (var pegi in PegiManager.PegiRates.OrderBy(p => p.Name))
+            {
+                filter.PegiRatings.Add(new SelectListItem
+                {
+                    Value = pegi.Id.ToString(),
+                    Text = pegi.Name,
+                    Selected = false
+                });
+            }
+
+            return PartialView("_FilterAndSort", filter);
+        }
+
+        [HttpPost]
+        public PartialViewResult Search(ProductFilterModel filter)
+        {
+            var products = new List<ProductListItem>();
+            bool isSelectedAnyPlatform = filter.Platforms.Any(p => p.Selected);
+            bool isSelectedAnyGenre = filter.Genres.Any(g => g.Selected);
+            bool isSelectedAnyPegi = filter.PegiRatings.Any(p => p.Selected);
+
+            foreach (var prod in ProductManager.Products.ToList())
+            {
+                if (!prod.IsDeleted && prod.Name.Contains(filter.SearchKeyword))
+                {
+                    if (isSelectedAnyGenre && filter.Genres.All(g => 
+                        g.Value != prod.GenreId.ToString())) { continue; }
+                    if (isSelectedAnyPlatform && filter.Platforms.All(p => 
+                        p.Value != prod.PlatformId.ToString())) { continue; }
+                    if (isSelectedAnyPegi && filter.PegiRatings.All(p => 
+                        p.Value != prod.PegiRatingId.ToString())) { continue; }
+                    products.Add(prod.ToListItem());
+                }
+            }
+
+            return PartialView("_SearchProductsResult", products.SortBy(filter.ProductSortType));
+        }
+
         private bool UploadFile(HttpPostedFileBase image)
         {
             var path = Server.MapPath("/Images/" + image.FileName);

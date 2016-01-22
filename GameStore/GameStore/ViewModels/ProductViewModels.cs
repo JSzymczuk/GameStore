@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -30,6 +31,43 @@ namespace GameStore.ViewModels
         public Guid PegiRatingId { get; set; }
      */
 
+    public enum ProductSortType
+    {
+        [Description("Nazwa rosnąco")]
+        NameAscending,
+		[Description("Nazwa malejąco")]
+        NameDescending,
+		[Description("Cena rosnąco")]
+        PriceAscending,
+		[Description("Cena malejąco")]
+        PriceDescending,
+		[Description("Ocena rosnąco")]
+        RatingAscending,
+		[Description("Ocena malejąco")]
+        RatingDescending,
+		[Description("Data premiery rosnąco")]
+        ReleaseAscending,
+		[Description("Data premiery malejąco")]
+        ReleaseDescending
+    }
+
+    public class ProductFilterModel
+    {
+        public String               SearchKeyword       { get; set; }
+        public ProductSortType      ProductSortType     { get; set; }
+        public SelectList           ProductSortTypes    { get; set; }
+        public List<SelectListItem> Platforms           { get; set; }
+        public List<SelectListItem> Genres              { get; set; }
+        public List<SelectListItem> PegiRatings         { get; set; }
+
+        public ProductFilterModel()
+        {
+            Genres = new List<SelectListItem>();
+            Platforms = new List<SelectListItem>();
+            PegiRatings = new List<SelectListItem>();
+        }
+    }
+
     public class ProductListItem
     {
         public Guid Id { get; set; }
@@ -37,6 +75,7 @@ namespace GameStore.ViewModels
         public string Publisher { get; set; }
         public string Description { get; set; }
         public string CoverList { get; set; }
+        public decimal Price { get; set; }
         public int BasePriceZl { get; set; }
         public string BasePriceGr { get; set; }
         public bool IsDiscounted { get; set; }

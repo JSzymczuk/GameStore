@@ -49,10 +49,11 @@ namespace GameStore.Helpers
                 CoverList = product.CoverList,
                 ReleaseDate = product.ReleaseDate,
                 Language = product.Language,
-                Rating = product.Rating,
+                Rating = product.Rating, 
                 BasePriceZl = (int)product.BasePrice,
                 BasePriceGr = gr < 10 ? gr < 1 ? "00" : "0" + gr.ToString() : gr.ToString(),
                 IsDiscounted = product.DiscountPrice.HasValue,
+                Price = product.DiscountPrice.HasValue ? product.DiscountPrice.Value : product.BasePrice,
                 Available = product.Remaining > 0,
                 GenreName = product.Genre.Name,
                 GenreId = product.GenreId,
@@ -127,6 +128,29 @@ namespace GameStore.Helpers
                 ReqRecommended = model.ReqRecommended, 
                 IsDeleted = false
             };
+        }
+        
+        public static IOrderedEnumerable<ProductListItem> SortBy(this IEnumerable<ProductListItem> items, ProductSortType sortType)
+        {
+            switch (sortType)
+            {
+                case ProductSortType.NameDescending:
+                    return items.OrderByDescending(i => i.Name);
+                case ProductSortType.PriceAscending:
+                    return items.OrderBy(i => i.Price);
+                case ProductSortType.PriceDescending:
+                    return items.OrderByDescending(i => i.Price);
+                case ProductSortType.RatingAscending:
+                    return items.OrderBy(i => i.Rating);
+                case ProductSortType.RatingDescending:
+                    return items.OrderByDescending(i => i.Rating);
+                case ProductSortType.ReleaseAscending:
+                    return items.OrderBy(i => i.ReleaseDate);
+                case ProductSortType.ReleaseDescending:
+                    return items.OrderByDescending(i => i.ReleaseDate);
+                default:
+                    return items.OrderBy(i => i.Name);
+            }
         }
     }
 }

@@ -6,43 +6,10 @@
 
 <main>
     <div class="wrapper">
-        <div class="column">
-            <ul class="side-menu">
-                <li><h3>Panel administratora</h3></li>
-                <li><a href="">Dodaj produkt</a></li>
-                <li><a href="">Zarządzaj produktami</a></li>
-                <li><a href="">Zarządzaj użytkownikami</a></li>
-                <li><a href="">Zarządzaj kategoriami</a></li>
-                <li><a href="">Zarządzaj rodzajami</a></li>
-                <li><a href="">Zarządzaj zamówieniami</a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-            </ul>
-        </div>
-        <div class="column fill-horizontal">
 
-            <table class="table product-list">
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
+        @Html.Action("InitializeFilter", new { keyword = string.Empty /*, platformId = value, genreId = value */ })
 
-                @foreach (var item in Model)
-                {
-                    @Html.Partial("_ProductSearchRow", item)
-                }
+        <!-- TU DODAĆ LISTE WYNIKÓW WYSZUKIWANIA -->
 
-            </table>
-
-        </div>
     </div>
 </main>

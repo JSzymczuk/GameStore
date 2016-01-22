@@ -1,0 +1,62 @@
+﻿@using GameStore.Helpers;
+@model GameStore.ViewModels.ProductFilterModel
+
+<div class="side-menu">
+
+    <h2>Filtruj i sortuj</h2>
+
+    @using (Html.BeginForm("Search", "Product", FormMethod.Post, new { @class = "form-condensed", role = "form" }))
+    {
+        @Html.HiddenFor(model => Model.SearchKeyword, new { @id = "filter-search-keyword" })
+        
+        <h3 class="no-border">Sortuj według</h3>
+        
+        @Html.DropDownListFor(model => Model.ProductSortType, Model.ProductSortTypes, new { @class = "form-input" })
+
+        <h3>Gatunek</h3>
+
+        for (int i = 0; i < Model.Genres.Count; i++)
+        {
+            <div class="form-group">
+                @Html.HiddenFor(modelItem => Model.Genres[i].Value)
+                @Html.HiddenFor(modelItem => Model.Genres[i].Text)
+                @Html.CheckBoxFor(modelItem => Model.Genres[i].Selected, new { @class = "form-input" })
+                <label class="check-label">@Model.Genres[i].Text</label>
+            </div>
+        }
+        
+        <h3>Platforma</h3>
+
+        for (int i = 0; i < Model.Platforms.Count; i++)
+        {
+            <div class="form-group">
+                @Html.HiddenFor(modelItem => Model.Platforms[i].Value)
+                @Html.HiddenFor(modelItem => Model.Platforms[i].Text)
+                @Html.CheckBoxFor(modelItem => Model.Platforms[i].Selected, new { @class = "form-input" })
+                <label class="check-label">@Model.Platforms[i].Text</label>
+            </div>
+        }
+        
+        <h3>Kategoria PEGI</h3>
+
+        for (int i = 0; i < Model.PegiRatings.Count; i++)
+        {
+            <div class="form-group">
+                @Html.HiddenFor(modelItem => Model.PegiRatings[i].Value)
+                @Html.HiddenFor(modelItem => Model.PegiRatings[i].Text)
+                @Html.CheckBoxFor(modelItem => Model.PegiRatings[i].Selected, new { @class = "form-input" })
+                <label class="check-label">@Model.PegiRatings[i].Text</label>
+            </div>
+        }
+
+        <button class="form-input" type="submit">Filtruj</button>
+    }
+
+</div>
+
+<script>
+    $("#product-search-bar").keyup(function () {
+        alert($(this).val());
+        $("#filter-search-keyword").val($(this).val());
+    });
+</script>

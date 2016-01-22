@@ -283,6 +283,8 @@
     <Content Include="Views\Shared\_UserMenu.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
     <Content Include="Views\Cart\MyOrder.cshtml" />
+    <Content Include="Views\Product\_FilterAndSort.cshtml" />
+    <Content Include="Views\Product\_SearchProductsResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
