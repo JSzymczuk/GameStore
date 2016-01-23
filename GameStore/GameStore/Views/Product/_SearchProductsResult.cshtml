@@ -21,14 +21,24 @@
                         @if (item.IsDiscounted)
                         {
                             <span class="discount-old-price">@item.BasePriceZl,@item.BasePriceGr</span>
+                            <div class="product-price">
+                                <span class="price-main">@item.DiscountPriceZl</span>
+                                <span class="price-sub">
+                                    <span class="price-grosze">@item.DiscountPriceGr</span>
+                                    <span class="price-currency">zł</span>
+                                </span>
+                            </div>
                         }
-                        <div class="product-price">
-                            <span class="price-main">@item.DiscountPriceZl</span>
-                            <span class="price-sub">
-                                <span class="price-grosze">@item.DiscountPriceGr</span>
-                                <span class="price-currency">zł</span>
-                            </span>
-                        </div>
+                        else
+                        {
+                            <div class="product-price">
+                                <span class="price-main">@item.BasePriceZl</span>
+                                <span class="price-sub">
+                                    <span class="price-grosze">@item.BasePriceGr</span>
+                                    <span class="price-currency">zł</span>
+                                </span>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="product-additional-info">

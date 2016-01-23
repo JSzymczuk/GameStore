@@ -40,73 +40,16 @@
             </div>
         </div>
     </nav>
-    @Html.Partial("_Nav")
-    @RenderBody()
-    <footer>
-        <div class="footer-map">
-            <div class="wrapper">
-                <div class="footer-menu">
-                    <div class="col-3">
-                        <h3>GameStore</h3>
-                        <ul>
-                            <li><a href="">Strona główna</a></li>
-                            <li><a href="">O sklepie</a></li>
-                            <li><a href="">Nasze produkty</a></li>
-                            <li><a href="">Wydarzenia bieżące</a></li>
-                            <li><a href="">Kontakt</a></li>
-                            <li><a href="">Regulamin</a></li>
-                            <li><a href="">Polityka prywatności</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-3">
-                        <h3>Moje konto</h3>
-                        <ul>
-                            <li><a href="">Koszyk</a></li>
-                            <li><a href="">Rejestracja</a></li>
-                            <li><a href="">Logowanie</a></li>
-                            <li><a href="">Moje zamówienia</a></li>
-                            <li><a href="">Mój adres</a></li>
-                            <li><a href="">Zresetuj hasło</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-3">
-                        <h3>Pomoc</h3>
-                        <ul>
-                            <li><a href="">Najczęstsze pytania</a></li>
-                            <li><a href="">Koszty wysyłki</a></li>
-                            <li><a href="">Zwroty i reklamacje</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="right">
-                    <p>Odwiedź i polub nas:</p>
-                    <div class="footer-social-links">
-                        <a id="f-facebook-link" href="http://facebook.com"></a>
-                        <a id="f-twitter-link" href="http://twitter.com"></a>
-                        <a id="f-google-link" href="http://google.com"></a>
-                        <a id="f-youtube-link" href="http://youtube.com"></a>
-                    </div>
-                    <p>Jeśli chcesz wiedzieć co nowego dzieje się w świecie gier, zapisz się na otrzymywanie naszego newslettera:</p>
-                    <div class="newsletter">
-                        <form>
-                            <input class="text-input" type="text" placeholder="Podaj adres e-mail" />
-                            <input type="button" id="newsletter-button" value="Zapisz" />
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <div class="wrapper">
-                Projekt stworzony został jako projekt zaliczeniowy przedmiotu Systemy Handlu Elektrownicznego w roku akademickim 2015-2016 przez Karolinę Kuras, Krystiana Kądzielę, Adama Kostusiaka, Huberta Pietruczuka oraz Damiana Roguskiego pod kierownictwem Jakuba Szymczuka. Serwis ma charakter wyłącznie edukacyjny i nie świadczy faktycznej sprzedaży umieszczonych w nim produktów. Prawa autorskie wszystkich umieszczonych materiałów należą do ich faktycznych właścicieli.
-            </div>
-        </div>
-    </footer>
+    <div class="outer-wrapper">
+        @Html.Partial("_Nav")
+        @RenderBody()
+    </div>
+    @Html.Partial("_Footer")
 
     <script>
         $(document).ready(function () {
             $('#slider').bxSlider({
-                mode: 'horizontal',
+                mode: 'fade',
                 useCSS: false,
                 infiniteLoop: true,
                 auto: true,
@@ -138,13 +81,13 @@
             $(".drop-down-menu").hide();
         });
         $(".news-wrapper").hover(
-			function () {
-			    $(this).find(".news-summary").stop().animate({ "top": "0" }, 100);
-			},
-			function () {
-			    $(this).find(".news-summary").stop().animate({ "top": "106px" }, 100);
-			}
-		);
+            function () {
+                $(this).find(".news-summary").stop().animate({ "top": "0" }, 100);
+            },
+            function () {
+                $(this).find(".news-summary").stop().animate({ "top": "106px" }, 100);
+            }
+        );
 
         $("#search-button").on('click', function () {
             var keyword = $("#product-search-bar").val();

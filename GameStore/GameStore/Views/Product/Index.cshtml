@@ -8,7 +8,14 @@
 <main>
     <div class="wrapper">
 
-        @Html.Action("InitializeFilter", new { keyword = ViewBag.Keyword, platformId = ViewBag.Platform, genreId = ViewBag.Genre, pegiId = ViewBag.Pegi })
+        @if(ViewBag.Filter != null)
+        {
+            Html.RenderPartial("_FilterAndSort", ViewBag.Filter as GameStore.ViewModels.ProductFilterModel);
+        }
+        else
+        {
+            Html.Action("InitializeFilter", new { keyword = ViewBag.Keyword, platformId = ViewBag.Platform, genreId = ViewBag.Genre, pegiId = ViewBag.Pegi });
+        }
 
         <div class="content product-seach">
             <h2>Wyszukiwanie produktów</h2>

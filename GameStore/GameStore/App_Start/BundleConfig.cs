@@ -23,7 +23,6 @@ namespace GameStore
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/general-style-old.css",
                       "~/Content/general-style.css"));
         }
     }

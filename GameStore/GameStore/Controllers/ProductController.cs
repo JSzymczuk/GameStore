@@ -31,40 +31,9 @@ namespace GameStore.Controllers
         public ActionResult Index(string keyword = "", Guid? platformId = null, Guid? genreId = null, Guid? pegiId = null)
         {
             ViewBag.Keyword = keyword;
-            ViewBag.PlatformId = platformId;
-            ViewBag.GenreId = genreId;
-            ViewBag.PegiId = pegiId;
-
-            var model = new List<ProductListItem>();
-            foreach (var p in ProductManager.Products.ToList())
-            {
-                if (!p.IsDeleted)
-                {
-                    model.Add(p.ToListItem());
-                }
-            }
-
-            if (keyword != "")
-            {
-                var filtered = model.Where(x => x.Name.Contains(keyword)).ToList();
-                model = filtered;
-            }
-            if (platformId.HasValue)
-            {
-                var filtered = model.Where(x => x.PlatformId == platformId.Value).ToList();
-                model = filtered;
-            }
-            if (genreId.HasValue)
-            {
-                var filtered = model.Where(x => x.GenreId == genreId.Value).ToList();
-                model = filtered;
-            }
-            if (pegiId.HasValue)
-            {
-                var filtered = model.Where(x => x.PegiID == pegiId.Value).ToList();
-                model = filtered;
-            }
-
+            var filter = CreateFilter(keyword, platformId, genreId, pegiId);
+            ViewBag.Filter = filter;
+            var model = SearchProducts(filter);
             return View(model);
         }
 
@@ -191,6 +160,18 @@ namespace GameStore.Controllers
         [HttpGet]
         public PartialViewResult InitializeFilter(string keyword, Guid? platformId, Guid? genreId, Guid? pegiId)
         {
+            return PartialView("_FilterAndSort", CreateFilter(keyword, platformId, genreId, pegiId));
+        }
+
+        [HttpPost]
+        public PartialViewResult Search(ProductFilterModel filter)
+        {
+            return PartialView("_SearchProductsResult", SearchProducts(filter));
+        }
+
+        [NonAction]
+        private ProductFilterModel CreateFilter(string keyword, Guid? platformId, Guid? genreId, Guid? pegiId)
+        {
             var filter = new ProductFilterModel();
 
             filter.SearchKeyword = keyword ?? string.Empty;
@@ -199,11 +180,11 @@ namespace GameStore.Controllers
 
             foreach (var platf in ProductManager.ProductCategories.OrderBy(c => c.Name))
             {
-                filter.Platforms.Add(new SelectListItem 
-                { 
-                    Value = platf.Id.ToString(), 
+                filter.Platforms.Add(new SelectListItem
+                {
+                    Value = platf.Id.ToString(),
                     Text = platf.NameShort ?? platf.Name,
-                    Selected = platf.Id == platformId 
+                    Selected = platf.Id == platformId
                 });
             }
             foreach (var genre in ProductManager.Genres.OrderBy(g => g.Name))
@@ -225,11 +206,11 @@ namespace GameStore.Controllers
                 });
             }
 
-            return PartialView("_FilterAndSort", filter);
+            return filter;
         }
-
-        [HttpPost]
-        public PartialViewResult Search(ProductFilterModel filter)
+        
+        [NonAction]
+        private IEnumerable<ProductListItem> SearchProducts(ProductFilterModel filter)
         {
             var products = new List<ProductListItem>();
 
@@ -237,21 +218,29 @@ namespace GameStore.Controllers
             bool isSelectedAnyGenre = filter.Genres != null && filter.Genres.Any(p => p.Selected);
             bool isSelectedAnyPegi = filter.PegiRatings != null && filter.PegiRatings.Any(p => p.Selected);
 
+            IEnumerable<SelectListItem> selectedPlatforms = null;
+            IEnumerable<SelectListItem> selectedPegis = null;
+            IEnumerable<SelectListItem> selectedGenres = null;
+
+            if (isSelectedAnyGenre) { selectedGenres = filter.Genres.Where(p => p.Selected == true); }
+            if (isSelectedAnyPegi) { selectedPegis = filter.PegiRatings.Where(p => p.Selected == true); }
+            if (isSelectedAnyPlatform) { selectedPlatforms = filter.Platforms.Where(p => p.Selected == true); }
+
             foreach (var prod in ProductManager.Products.ToList())
             {
-                if (!prod.IsDeleted && prod.Name.Contains(filter.SearchKeyword != null ? filter.SearchKeyword : ""))
+                if (!prod.IsDeleted && prod.Name.Contains(filter.SearchKeyword != null ? filter.SearchKeyword : string.Empty))
                 {
-                    if (isSelectedAnyGenre && filter.Genres.All(g => 
-                        g.Value != prod.GenreId.ToString())) { continue; }
-                    if (isSelectedAnyPlatform && filter.Platforms.All(p => 
-                        p.Value != prod.PlatformId.ToString())) { continue; }
-                    if (isSelectedAnyPegi && filter.PegiRatings.All(p => 
-                        p.Value != prod.PegiRatingId.ToString())) { continue; }
+                    if (isSelectedAnyGenre && !selectedGenres.Any(g =>
+                        g.Value == prod.GenreId.ToString())) { continue; }
+                    if (isSelectedAnyPlatform && !selectedPlatforms.Any(p =>
+                        p.Value == prod.PlatformId.ToString())) { continue; }
+                    if (isSelectedAnyPegi && !selectedPegis.Any(p =>
+                        p.Value == prod.PegiRatingId.ToString())) { continue; }
                     products.Add(prod.ToListItem());
                 }
             }
 
-            return PartialView("_SearchProductsResult", products.SortBy(filter.ProductSortType));
+            return products.SortBy(filter.ProductSortType);
         }
 
         private bool UploadFile(HttpPostedFileBase image)

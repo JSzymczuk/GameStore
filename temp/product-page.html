@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	<title>GameStore</title>
+	<meta name='Author' content='Jakub Szymczuk' />
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CAlfa+Slab+One%7COpen+Sans:400,800%7CHammersmith+One&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css' />	
+	<link rel='stylesheet' href='css/general-style.css'/>
+	<link rel="stylesheet" href="css/lightbox.min.css">
+	<script src="scripts/jquery-1.12.0.min.js"></script>
+	<script src="scripts/jquery.bxslider.min.js"></script>
+</head>
+<body>
+	<nav class="upper-bar">
+		<div class="wrapper">
+			<div class="left">
+				<div class="logo"></div>
+				<div class="social-links">
+					<a id="facebook-link" href="http://facebook.com"></a>
+					<a id="twitter-link" href="http://twitter.com"></a>
+					<a id="google-link" href="http://google.com"></a>
+				</div>
+			</div>
+			<div class="right">
+				<div class="cart">
+					<a id="cart-link" href=""></a>
+				</div>
+				<div class="account">
+					<a id="login-link" href=""></a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="outer-wrapper">
+		<nav class="lower-bar" id="drop-down-menu-bar">
+			<div class="wrapper">
+				<div class="search-bar">
+					<form>
+						<input class="text-input" type="text" placeholder="Szukaj produktów"/>
+						<input type="button" id="search-button"/>
+					</form>
+				</div>
+				<ol class="menu-links">
+					<li rel="drop-down-menu-1"><a class="menu-link">PC</a>
+					<li rel="drop-down-menu-2"><a class="menu-link">PS4</a>
+					<li rel="drop-down-menu-3"><a class="menu-link">PS3</a>
+					<li rel="drop-down-menu-4"><a class="menu-link">XBOX 360</a>
+					<li rel="drop-down-menu-5"><a class="menu-link">XBOX ONE</a>
+					<li rel="drop-down-menu-6"><a class="menu-link">Inne</a>
+				</ol>
+			</div>			
+			<nav id="drop-down-menu-1" class="drop-down-menu">
+				<h3>Gry komputerowe</h3>
+				<div class="col-2">
+					<h4>Rodzaj</h4>
+					<ol>
+						<li><a href="">Akcja</a></li>
+						<li><a href="">Przygodowa</a></li>
+						<li><a href="">Strategiae</a></li>
+						<li><a href="">RPG</a></li>
+						<li><a href="">Inne</a></li>
+					</ol>
+				</div>
+				<div class="col-2">
+					<h4>PEGI</h4>
+					<ol>
+						<li><a href="">3+</a></li>
+						<li><a href="">7+</a></li>
+						<li><a href="">12+</a></li>
+						<li><a href="">16+</a></li>
+						<li><a href="">18+</a></li>
+					</ol>
+					<h4>Wydanie</h4>
+					<ol>
+						<li><a href="">Pudełkowe</a></li>
+						<li><a href="">Cyfrowe</a></li>
+					</ol>
+				</div>
+			</nav>
+			<nav id="drop-down-menu-2" class="drop-down-menu"></nav>
+			<nav id="drop-down-menu-3" class="drop-down-menu"></nav>
+			<nav id="drop-down-menu-4" class="drop-down-menu"></nav>
+			<nav id="drop-down-menu-5" class="drop-down-menu"></nav>
+			<nav id="drop-down-menu-6" class="drop-down-menu"></nav>
+		</nav>
+		<header></header>
+		<main>
+			<div class="wrapper">
+				<div class="content single-column-content">					
+					<section class="product-details">						
+						<a href="" class="product-image-wrapper">
+							<div class="image-tint background-white"></div>
+							<img alt="Tekst alternatywny" src="Images/Covers/wiedzmin3.jpg" width="250"/>
+						</a>						
+						<div class="product-info">						
+							<h1>Wiedźmin 3: Dziki Gon</h1>	
+							<div class="left">						
+								<div class="product-rate">
+									<span class="rate">4,79</span>
+									<div class="inline-block">
+										<div class="rating-stars">
+											<div class="rating-stars-result"></div>
+											<a href="" class="rate-star"></a>
+											<a href="" class="rate-star"></a>
+											<a href="" class="rate-star"></a>
+											<a href="" class="rate-star"></a>
+											<a href="" class="rate-star"></a>
+										</div>
+										Oddanych głosów: 7
+									</div>
+								</div>
+								<ul class="product-additional-info">
+									<li><span class="title">Platforma:</span>PC</li>
+									<li><span class="title">Wydawca:</span>CD Projekt</li>
+									<li><span class="title">Data premiery:</span>19 maja 2015</li>
+									<li><span class="title">Gatunek:</span>RPG</li>
+									<li><span class="title">Język:</span>polski</li>
+								</ul>
+							</div>
+							<form id="order-product">
+								<!-- Jeśli max większy niż liczba sztuk w bazie to ograniczyć -->				
+								<span class="gray">Ilość: </span>
+								<input class="text-input" type="number" min="0" max="100" step="1" value="2"/> szt.
+								<!-- Jak nie ma to pokazać --><br>
+								<span class="gray">Ilość: </span>
+								<span class="red">produkt niedostępny</span><br>								
+									<span class="gray table-cell top-align">Cena: </span>								
+									<div class="price">
+										<div class="product-price">
+											<span class="price-main">119</span>
+											<span class="price-sub">
+												<span class="price-grosze">99</span>
+												<span class="price-currency">zł</span>
+											</span>
+										</div>
+										<span class="discount-old-price">129,99</span>
+									</div>
+								
+								<button class="add-to-cart" type="submit">Do koszyka</button>
+							</form>
+						</div>
+					</section>					
+					
+					<article>
+						<section>
+							<h2>In vestibulum nulla</h2>
+							<p>
+								Praesent efficitur efficitur consequat. Morbi vitae mollis lacus. Phasellus a luctus risus. Mauris hendrerit ex in sem rhoncus, ut vulputate leo tristique. Nullam ligula justo, commodo at malesuada sed, scelerisque non sem. Suspendisse eget dictum sapien, et venenatis enim. Duis vehicula est ante, at mattis velit euismod et. Aliquam in vestibulum nulla. Mauris libero dolor, fermentum sit amet libero eget, molestie condimentum tellus. In risus mi, rhoncus sit amet feugiat sed, aliquet sit amet nisl. Nullam mollis, est ac consequat fringilla, risus lectus pharetra odio, rutrum lacinia nunc ante vitae turpis. Curabitur id turpis sollicitudin, tincidunt lectus sed, lobortis lectus. Pellentesque vel sem aliquet, pharetra erat eu, malesuada nulla. Vivamus dictum lectus eget ante dictum gravida. Vivamus sapien mauris, laoreet vel consectetur a, luctus ornare nisl. Sed vitae malesuada lacus.
+							</p>
+							<p>
+								Praesent efficitur efficitur consequat. Morbi vitae mollis lacus. Phasellus a luctus risus. Mauris hendrerit ex in sem rhoncus, ut vulputate leo tristique. Nullam ligula justo, commodo at malesuada sed, scelerisque non sem. Suspendisse eget dictum sapien, et venenatis enim. Duis vehicula est ante, at mattis velit euismod et. Aliquam in vestibulum nulla. Mauris libero dolor, fermentum sit amet libero eget, molestie condimentum tellus. In risus mi, rhoncus sit amet feugiat sed, aliquet sit amet nisl. Nullam mollis, est ac consequat fringilla, risus lectus pharetra odio, rutrum lacinia nunc ante vitae turpis. Curabitur id turpis sollicitudin, tincidunt lectus sed, lobortis lectus. Pellentesque vel sem aliquet, pharetra erat eu, malesuada nulla. Vivamus dictum lectus eget ante dictum gravida. Vivamus sapien mauris, laoreet vel consectetur a, luctus ornare nisl. Sed vitae malesuada lacus.
+							</p>
+						</section>
+						<section>
+							<h2>In vestibulum nulla</h2>
+							<p>
+								Praesent efficitur efficitur consequat. Morbi vitae mollis lacus. Phasellus a luctus risus. Mauris hendrerit ex in sem rhoncus, ut vulputate leo tristique. Nullam ligula justo, commodo at malesuada sed, scelerisque non sem. Suspendisse eget dictum sapien, et venenatis enim. Duis vehicula est ante, at mattis velit euismod et. Aliquam in vestibulum nulla. Mauris libero dolor, fermentum sit amet libero eget, molestie condimentum tellus. In risus mi, rhoncus sit amet feugiat sed, aliquet sit amet nisl. Nullam mollis, est ac consequat fringilla, risus lectus pharetra odio, rutrum lacinia nunc ante vitae turpis. Curabitur id turpis sollicitudin, tincidunt lectus sed, lobortis lectus. Pellentesque vel sem aliquet, pharetra erat eu, malesuada nulla. Vivamus dictum lectus eget ante dictum gravida. Vivamus sapien mauris, laoreet vel consectetur a, luctus ornare nisl. Sed vitae malesuada lacus.
+							</p>
+							<p>
+								Praesent efficitur efficitur consequat. Morbi vitae mollis lacus. Phasellus a luctus risus. Mauris hendrerit ex in sem rhoncus, ut vulputate leo tristique. Nullam ligula justo, commodo at malesuada sed, scelerisque non sem. Suspendisse eget dictum sapien, et venenatis enim. Duis vehicula est ante, at mattis velit euismod et. Aliquam in vestibulum nulla. Mauris libero dolor, fermentum sit amet libero eget, molestie condimentum tellus. In risus mi, rhoncus sit amet feugiat sed, aliquet sit amet nisl. Nullam mollis, est ac consequat fringilla, risus lectus pharetra odio, rutrum lacinia nunc ante vitae turpis. Curabitur id turpis sollicitudin, tincidunt lectus sed, lobortis lectus. Pellentesque vel sem aliquet, pharetra erat eu, malesuada nulla. Vivamus dictum lectus eget ante dictum gravida. Vivamus sapien mauris, laoreet vel consectetur a, luctus ornare nisl. Sed vitae malesuada lacus.
+							</p>
+						</section>
+					</article>
+					
+					<section>
+						<h2>Wymagania sprzętowe</h2>
+						<div class="requirements">
+							<div class="col-2">
+								<h4>Minimalne:</h4>
+								<p>
+									Procesor: Intel Core i5-2500K 3.3GHz/AMD Phenom II X4 940 3.7GHz<br>
+									Pamięć RAM: 6GB<br>
+									Karta graficzna: 2GB GeForce GTX 660/Radeon HD 7870 lub lepsza<br>
+									Wolne miejsce na dysku: 40 GB<br>
+									System operacyjny: Windows 7/8/8.1 64-bit
+								</p>
+							</div>
+							<div class="col-2">
+								<h4>Zalecane:</h4>
+								<p>
+									Procesor: Intel Core i7-3770 3.4GHz/AMD FX-8350 4GHz<br>
+									Pamięć RAM: 8GB<br>
+									Karta graficzna: 2GB GeForce GTX 770/4GB Radeon R9 290 lub lepsza<br>
+									Wolne miejsce na dysku: 40GB<br>
+									System operacyjny: Windows 7/8/8.1 64-bit
+								</p>						
+							</div>
+						</div>
+					</section>
+					
+					<section>
+						<h2 class="no-border">Galeria</h2>
+						<section id="gallery" class="gallery gallery-wrapper">
+							<div id="gallery-arrow-left" class="gallery-arrow">
+								<div class="arrow"></div>
+							</div>
+							<div id="images-container" class="images-container">
+								<a class="gallery-img" href="Images/Screenshots/screen1.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen1.jpg" alt="image-1"/>
+									</div>
+								</a>
+
+								<a class="gallery-img" href="Images/Screenshots/screen2.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen2.jpg" alt="image-2"/>
+									</div>
+								</a>
+								<a class="gallery-img" href="Images/Screenshots/screen3.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen3.jpg" alt="image-3"/>
+									</div>
+								</a>
+								<a class="gallery-img" href="Images/Screenshots/screen4.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen4.jpg" alt="image-4"/>
+									</div>
+								</a>
+								<a class="gallery-img" href="Images/Screenshots/screen5.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen5.jpg" alt="image-5"/>
+									</div>
+								</a>
+								<a class="gallery-img" href="Images/Screenshots/screen6.jpg" data-lightbox="screenshots-gallery">
+									<div class="thumb-wrapper">
+										<div class="image-tint background-white"></div>
+										<img src="Images/Screenshots/screen6.jpg" alt="image-6"/>
+									</div>
+								</a>
+							</div>
+							<div id="gallery-arrow-right" class="gallery-arrow">
+								<div class="arrow"></div>
+							</div>
+							<div class="clear"></div>
+						</section>
+						<script src="scripts/lightbox-plus-jquery.min.js"></script>					
+					</section>
+				
+					<section>
+						<h2>Komentarze</h2>
+						
+						<form id="add-comment" class="general-form">					
+							<h3>Dodaj komentarz</h3>					
+							<div class="form-group">
+								<input class="form-input" type="text" placeholder="Tytuł komentarza"/>
+							</div>
+							<div class="form-group">						
+								<div class="text-danger">Pole nie może zostać puste.</div>
+								<textarea class="form-input" placeholder="Treść komentarza"></textarea>
+							</div>						
+							<div class="form-group">	
+								<button class="form-input" type="submit">Dodaj komentarz</button>						
+							</div>
+						</form>
+						
+						<div class="comment-options right-align">
+							<a id="add-comment-show">Dodaj komentarz</a>
+							&nbsp;&nbsp;
+							<a href="">Zobacz wszystkie komentarze</a>
+						</div>
+						
+						<script>
+							$("#add-comment-show").click(function(){
+								$("#add-comment").show();
+								$(this).hide();
+							});
+						</script>
+						
+						<ul class="table-list">
+							<li class="comment">
+								<div class="comment-title">
+									<h4><a href="">Gość</a>: Tytuł komentarza</h4>
+									<div class="date">31 października 2015 16:58</div>
+								</div>
+								<div>
+									Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
+								</div>
+								<!-- jeśli admin lub autor komentarza -->
+								<div class="right-align">
+									<a href="">Usuń komentarz</a>
+								</div>
+							</li>
+							<li class="comment">
+								<div class="comment-title">
+									<h4><a href="">Gość</a>: Tytuł komentarza</h4>
+									<div class="date">31 października 2015 16:58</div>
+								</div>
+								<div>
+									Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
+								</div>
+							</li>
+							<li class="comment">
+								<div class="comment-title">
+									<h4><a href="">Gość</a>: Tytuł komentarza</h4>
+									<div class="date">31 października 2015 16:58</div>
+								</div>
+								<div>
+									Lorem Ipsum jest tekstem stosowanym jako przykładowy wypełniacz w przemyśle poligraficznym. Został po raz pierwszy użyty w XV w. przez nieznanego drukarza do wypełnienia tekstem próbnej książki. Pięć wieków później zaczął być używany przemyśle elektronicznym, pozostając praktycznie niezmienionym. Spopularyzował się w latach 60. XX w. wraz z publikacją arkuszy Letrasetu, zawierających fragmenty Lorem Ipsum, a ostatnio z zawierającym różne wersje Lorem Ipsum oprogramowaniem przeznaczonym do realizacji druków na komputerach osobistych, jak Aldus PageMaker
+								</div>
+							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</main>
+	</div>
+	<footer>
+		<div class="footer-map">
+			<div class="wrapper">
+				<div class="footer-menu">
+					<div class="col-3">
+						<h3>GameStore</h3>
+						<ul>
+							<li><a href="">Strona główna</a></li>
+							<li><a href="">O sklepie</a></li>
+							<li><a href="">Nasze produkty</a></li>
+							<li><a href="">Wydarzenia bieżące</a></li>
+							<li><a href="">Kontakt</a></li>
+							<li><a href="">Regulamin</a></li>
+							<li><a href="">Polityka prywatności</a></li>
+						</ul>
+					</div>
+					<div class="col-3">
+						<h3>Moje konto</h3>
+						<ul>
+							<li><a href="">Koszyk</a></li>
+							<li><a href="">Rejestracja</a></li>
+							<li><a href="">Logowanie</a></li>
+							<li><a href="">Moje zamówienia</a></li>
+							<li><a href="">Mój adres</a></li>
+							<li><a href="">Zresetuj hasło</a></li>
+						</ul>
+					</div>
+					<div class="col-3">
+						<h3>Pomoc</h3>
+						<ul>
+							<li><a href="">Najczęstsze pytania</a></li>
+							<li><a href="">Koszty wysyłki</a></li>
+							<li><a href="">Zwroty i reklamacje</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="right">
+					<p>Odwiedź i polub nas:</p>
+					<div class="footer-social-links">
+						<a id="f-facebook-link" href="http://facebook.com"></a>
+						<a id="f-twitter-link" href="http://twitter.com"></a>
+						<a id="f-google-link" href="http://google.com"></a>
+						<a id="f-youtube-link" href="http://youtube.com"></a>
+					</div>
+					<p>Jeśli chcesz wiedzieć co nowego dzieje się w świecie gier, zapisz się na otrzymywanie naszego newslettera:</p>
+					<div class="newsletter">
+						<form>
+							<input class="text-input" type="text" placeholder="Podaj adres e-mail"/>
+							<input type="button" id="newsletter-button" value="Zapisz"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="copyright">
+			<div class="wrapper">
+				Projekt stworzony został jako projekt zaliczeniowy przedmiotu Systemy Handlu Elektrownicznego w roku akademickim 2015-2016 przez Karolinę Kuras, Krystiana Kądzielę, Adama Kostusiaka, Huberta Pietruczuka oraz Damiana Roguskiego pod kierownictwem Jakuba Szymczuka. Serwis ma charakter wyłącznie edukacyjny i nie świadczy faktycznej sprzedaży umieszczonych w nim produktów. Prawa autorskie wszystkich umieszczonych materiałów należą do ich faktycznych właścicieli.
+			</div>
+		</div>
+	</footer>
+	
+	<script>
+		var containerPosition = 0;
+		var minGalleryContainerPosition = $("#gallery").width() - $("#images-container").width() - 54; 
+		var maxGalleryContainerPosition = 54;
+		var arrayLeft = $("#gallery-arrow-left");
+		var arrayRight = $("#gallery-arrow-right");
+		var galleryContainter = $("#images-container");		
+		arrayLeft.mouseover(function(){
+				arrayLeft = setInterval(function(){
+					if (containerPosition < maxGalleryContainerPosition) {
+						containerPosition+=2;
+						galleryContainter.css("left", containerPosition);
+					}
+				}, 1);
+			return false;
+		});
+		arrayLeft.click(function(){
+			if (containerPosition < maxGalleryContainerPosition) { 
+				containerPosition+=200;
+				if (containerPosition > maxGalleryContainerPosition) {
+					containerPosition = maxGalleryContainerPosition;
+				}
+				galleryContainter.css("left", containerPosition);
+			}
+		});
+		arrayRight.mouseover(function(){
+				arrayRight = setInterval(function(){
+					if (containerPosition > minGalleryContainerPosition) {
+						containerPosition-=2;
+						galleryContainter.css("left", containerPosition);
+					}
+				}, 1);
+			return false;
+		});		
+		arrayRight.click(function(){
+			if (containerPosition > minGalleryContainerPosition) {
+				containerPosition-=200;
+				if (containerPosition < minGalleryContainerPosition) {
+					containerPosition = minGalleryContainerPosition;
+				}
+				galleryContainter.css("left", containerPosition);
+			}
+		});
+		$(document).mouseout(function(){
+			clearInterval(arrayLeft);
+			clearInterval(arrayRight);
+			return false;
+		});
+	</script>
+	
+	<script>
+		$(document).ready(function(){
+			$('#slider').bxSlider({
+				mode: 'horizontal',
+				useCSS: false,
+				infiniteLoop: true,
+				auto: true,
+				pause: 5000,
+				prevSelector: '#slider-prev',
+				nextSelector: '#slider-next',
+				pager: true,
+				pagerCustom: '#slide-pager'
+			});
+		});		
+		$(".rating-stars").mousemove(function(e){
+			var sender = $(this);
+			var x = e.pageX - sender.offset().left;
+			sender.find(".rating-stars-result").css('width', x + 'px');
+		});		
+		$("#drop-down-menu-bar .menu-links li").mouseenter(function() {
+			$(".drop-down-menu").hide();
+			var $this = $(this);
+			var id = $this.attr("rel");
+			var $current = $("#" + id);
+			var position = $this.offset();
+			$current.css("top", position.top + $this.outerHeight());
+			$current.css("left", position.left);
+			$current.show();
+		});
+		$(".drop-down-menu").mouseleave(function() {
+			$(".drop-down-menu").hide();
+		});
+		$("main").mouseenter(function() {
+			$(".drop-down-menu").hide();
+		});
+		$(".upper-bar").mouseenter(function() {
+			$(".drop-down-menu").hide();
+		});
+		$(".news-wrapper").hover(
+			function() {
+				$(this).find(".news-summary").stop().animate({"top": "0"}, 100);
+			},
+			function() {
+				$(this).find(".news-summary").stop().animate({"top": "106px"}, 100);
+			}
+		);
+		
+	</script>
+</body>
+</html>
