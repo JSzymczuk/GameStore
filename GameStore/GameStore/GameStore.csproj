@@ -285,6 +285,7 @@
     <Content Include="Views\Cart\MyOrder.cshtml" />
     <Content Include="Views\Product\_FilterAndSort.cshtml" />
     <Content Include="Views\Product\_SearchProductsResult.cshtml" />
+    <Content Include="Views\Shared\_Nav.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

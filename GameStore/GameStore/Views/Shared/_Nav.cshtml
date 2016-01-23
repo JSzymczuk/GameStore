@@ -1,0 +1,167 @@
+﻿<nav class="lower-bar" id="drop-down-menu-bar">
+    <div class="wrapper">
+        <div class="search-bar">
+            <form>
+                <input id="product-search-bar" class="text-input" type="text" placeholder="Szukaj produktów" />
+                <input type="button" id="search-button" />
+            </form>
+        </div>
+        <ol class="menu-links">
+            <li rel="drop-down-menu-1"><a class="menu-link">PC</a>
+            <li rel="drop-down-menu-2"><a class="menu-link">PS4</a>
+            <li rel="drop-down-menu-3"><a class="menu-link">PS3</a>
+            <li rel="drop-down-menu-4"><a class="menu-link">XBOX 360</a>
+            <li rel="drop-down-menu-5"><a class="menu-link">XBOX ONE</a>
+            <li rel="drop-down-menu-6"><a class="menu-link">Inne</a>
+        </ol>
+    </div>
+    <!--1-->
+    <nav id="drop-down-menu-1" class="drop-down-menu">
+        <h3>Gry komputerowe</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "2c59b4fd-68bd-e511-83f8-74d435e8dfc9", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!--2-->
+    <nav id="drop-down-menu-2" class="drop-down-menu">
+        <h3>Gry na PlayStation 4</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "5cfad253-70c1-e511-82a9-d4c9efe7aebb", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!--3-->
+    <nav id="drop-down-menu-3" class="drop-down-menu">
+        <h3>Gry na PlayStation 3</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "3aa60362-70c1-e511-82a9-d4c9efe7aebb", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!--4-->
+    <nav id="drop-down-menu-4" class="drop-down-menu">
+        <h3>Gry na XBOX 360</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "abe87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!--5-->
+    <nav id="drop-down-menu-5" class="drop-down-menu">
+        <h3>Gry na XBOX ONE</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "ace87d6a-70c1-e511-82a9-d4c9efe7aebb", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!--6-->
+    <nav id="drop-down-menu-6" class="drop-down-menu">
+        <h3>Gry na inne platformy</h3>
+        <div class="col-2">
+            <h4>Rodzaj</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", genreId = "b6c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Akcja</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", genreId = "b7c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Przygodowa</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", genreId = "bfd4e3c0-6bbd-e511-83f8-74d435e8dfc9" })'>Strategia</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", genreId = "b8c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>RPG</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", genreId = "b9c4d383-6ec1-e511-82a9-d4c9efe7aebb" })'>Inne</a></li>
+            </ol>
+        </div>
+        <div class="col-2">
+            <h4>PEGI</h4>
+            <ol>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", pegiId = "d61a4fef-8cbd-e511-83f8-74d435e8dfc9" })'>3+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", pegiId = "017a2a12-9abd-e511-83f8-74d435e8dfc9" })'>7+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", pegiId = "58069622-6fc1-e511-82a9-d4c9efe7aebb" })'>12+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", pegiId = "59069622-6fc1-e511-82a9-d4c9efe7aebb" })'>16+</a></li>
+                <li><a href='@Url.Action("Index", "Product", new { platformId = "f031317c-72c1-e511-82a9-d4c9efe7aebb", pegiId = "5a069622-6fc1-e511-82a9-d4c9efe7aebb" })'>18+</a></li>
+            </ol>
+        </div>
+    </nav>
+</nav>

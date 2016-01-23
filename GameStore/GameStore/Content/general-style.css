@@ -1017,7 +1017,7 @@ textarea.form-input {
     height: 171px;
     padding: 8px;
     margin-bottom: 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     border: 1px solid rgba(0,0,0,.15);
 	border-radius: 4px;
     color: #222;
@@ -1200,7 +1200,7 @@ textarea.form-input {
 /* PRAWA KOLUMNA */
 
 .content {
-    margin-left: 220px;
+    margin-left: 290px;
     position: relative;
     padding-bottom: 40px;
 }

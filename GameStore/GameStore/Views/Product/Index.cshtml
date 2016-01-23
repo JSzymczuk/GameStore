@@ -2,14 +2,20 @@
 
 @{
     ViewBag.Title = "Produkty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <main>
     <div class="wrapper">
 
-        @Html.Action("InitializeFilter", new { keyword = string.Empty /*, platformId = value, genreId = value */ })
+        @Html.Action("InitializeFilter", new { keyword = ViewBag.Keyword, platformId = ViewBag.Platform, genreId = ViewBag.Genre, pegiId = ViewBag.Pegi })
 
-        <!-- TU DODAĆ LISTE WYNIKÓW WYSZUKIWANIA -->
+        <div class="content product-seach">
+            <h2>Wyszukiwanie produktów</h2>
 
+            <div id="search-results">
+                @Html.Partial("_SearchProductsResult", Model)
+            </div>
+        </div>
     </div>
 </main>

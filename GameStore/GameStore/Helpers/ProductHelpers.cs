@@ -49,7 +49,7 @@ namespace GameStore.Helpers
                 CoverList = product.CoverList,
                 ReleaseDate = product.ReleaseDate,
                 Language = product.Language,
-                Rating = product.Rating, 
+                Rating = product.Rating,
                 BasePriceZl = (int)product.BasePrice,
                 BasePriceGr = gr < 10 ? gr < 1 ? "00" : "0" + gr.ToString() : gr.ToString(),
                 IsDiscounted = product.DiscountPrice.HasValue,
@@ -60,8 +60,9 @@ namespace GameStore.Helpers
                 PlatformName = product.Platform.Name,
                 PlatformId = product.PlatformId,
                 CommentsCount = product.Comments.Count,
-                VotesCount = product.Rates.Count, 
-                ReleaseDateString = product.ReleaseDate.ToDisplayableDate()
+                VotesCount = product.Rates.Count,
+                ReleaseDateString = product.ReleaseDate.ToDisplayableDate(),
+                PegiID = product.PegiRatingId
             };
 
             if (model.IsDiscounted)

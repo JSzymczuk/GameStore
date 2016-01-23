@@ -40,60 +40,8 @@
             </div>
         </div>
     </nav>
-    <nav class="lower-bar" id="drop-down-menu-bar">
-        <div class="wrapper">
-            <div class="search-bar">
-                <form>
-                    <input id="product-search-bar" class="text-input" type="text" placeholder="Szukaj produktów" />
-                    <input type="button" id="search-button" />
-                </form>
-            </div>
-            <ol class="menu-links">
-                <li rel="drop-down-menu-1"><a class="menu-link">PC</a>
-                <li rel="drop-down-menu-2"><a class="menu-link">PS4</a>
-                <li rel="drop-down-menu-3"><a class="menu-link">PS3</a>
-                <li rel="drop-down-menu-4"><a class="menu-link">XBOX 360</a>
-                <li rel="drop-down-menu-5"><a class="menu-link">XBOX ONE</a>
-                <li rel="drop-down-menu-6"><a class="menu-link">Inne</a>
-            </ol>
-        </div>
-        <nav id="drop-down-menu-1" class="drop-down-menu">
-            <h3>Gry komputerowe</h3>
-            <div class="col-2">
-                <h4>Rodzaj</h4>
-                <ol>
-                    <li><a href="">Akcja</a></li>
-                    <li><a href="">Przygodowa</a></li>
-                    <li><a href="">Strategiae</a></li>
-                    <li><a href="">RPG</a></li>
-                    <li><a href="">Inne</a></li>
-                </ol>
-            </div>
-            <div class="col-2">
-                <h4>PEGI</h4>
-                <ol>
-                    <li><a href="">3+</a></li>
-                    <li><a href="">7+</a></li>
-                    <li><a href="">12+</a></li>
-                    <li><a href="">16+</a></li>
-                    <li><a href="">18+</a></li>
-                </ol>
-                <h4>Wydanie</h4>
-                <ol>
-                    <li><a href="">Pudełkowe</a></li>
-                    <li><a href="">Cyfrowe</a></li>
-                </ol>
-            </div>
-        </nav>
-        <nav id="drop-down-menu-2" class="drop-down-menu"></nav>
-        <nav id="drop-down-menu-3" class="drop-down-menu"></nav>
-        <nav id="drop-down-menu-4" class="drop-down-menu"></nav>
-        <nav id="drop-down-menu-5" class="drop-down-menu"></nav>
-        <nav id="drop-down-menu-6" class="drop-down-menu"></nav>
-    </nav>
-
+    @Html.Partial("_Nav")
     @RenderBody()
-
     <footer>
         <div class="footer-map">
             <div class="wrapper">
@@ -198,6 +146,10 @@
 			}
 		);
 
+        $("#search-button").on('click', function () {
+            var keyword = $("#product-search-bar").val();
+            window.location = '/product/index?keyword=' + keyword;
+        });
     </script>
 </body>
 </html>

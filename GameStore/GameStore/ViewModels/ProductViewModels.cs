@@ -93,6 +93,8 @@ namespace GameStore.ViewModels
         public Guid GenreId { get; set; }
         public string PlatformName { get; set; }
         public Guid PlatformId { get; set; }
+
+        public Guid PegiID { get; set; }
     }
 
     public class ProductViewModel

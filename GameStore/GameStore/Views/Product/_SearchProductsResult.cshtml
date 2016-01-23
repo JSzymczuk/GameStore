@@ -1,1 +1,57 @@
-﻿<!-- TO DO -->
+﻿@model IEnumerable<GameStore.ViewModels.ProductListItem>
+
+<ul class="table-list">
+    @foreach (var item in Model)
+    {
+        <li class="table-list-item">
+            <a href="" class="product-image-wrapper">
+                @if (item.IsDiscounted)
+                {
+                    <div class="product-discount">-@item.DiscountPercentage%</div>
+                }
+                <div class="image-tint background-white"></div>
+                <img alt="@item.Name" src="@item.CoverList" height="153" width="108" />
+            </a>
+            <div class="product-info">
+                <div class="info-header">
+                    <a href="@item.Id" class="title-wrapper">
+                        <h3>@item.Name</h3>
+                    </a>
+                    <div class="product-price">
+                        @if (item.IsDiscounted)
+                        {
+                            <span class="discount-old-price">@item.BasePriceZl,@item.BasePriceGr</span>
+                        }
+                        <div class="product-price">
+                            <span class="price-main">@item.DiscountPriceZl</span>
+                            <span class="price-sub">
+                                <span class="price-grosze">@item.DiscountPriceGr</span>
+                                <span class="price-currency">zł</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-additional-info">
+                    Platforma: @item.PlatformName<br>
+                    Wydawca: @item.Publisher<br>
+                    Data premiery: @item.ReleaseDateString<br>
+                    Gatunek: @item.GenreName<br>
+                    Język: @item.Language
+                </div>
+                <div class="product-rate">
+                    <div class="rating-stars">
+                        <div class="rating-stars-result"></div>
+                        <a href="" class="rate-star"></a>
+                        <a href="" class="rate-star"></a>
+                        <a href="" class="rate-star"></a>
+                        <a href="" class="rate-star"></a>
+                        <a href="" class="rate-star"></a>
+                    </div>
+                    Oddanych głosów: @item.VotesCount
+                </div>
+                <div class="add-to-cart">Do koszyka</div>
+            </div>
+        </li>
+    }
+</ul>
+
