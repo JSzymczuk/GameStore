@@ -296,6 +296,13 @@
     <Content Include="Views\Product\ProductDetails.cshtml" />
     <Content Include="Views\Product\_Comments.cshtml" />
     <Content Include="Views\Product\_AddComment.cshtml" />
+    <Content Include="Views\Home\Regulations.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Shared\_HomeMenu.cshtml" />
+    <Content Include="Views\Shared\_HelpMenu.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\ShippingCosts.cshtml" />
+    <Content Include="Views\Home\Complaints.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

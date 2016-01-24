@@ -63,5 +63,20 @@ namespace GameStore.Controllers
             }
             return View(model);
         }
+        
+        public ActionResult AddToNewsletter(string email)
+        {
+            if (email != "")
+            {
+                var client = new SmtpClient("smtp.gmail.com", 587)
+                {
+                    Credentials = new NetworkCredential("2016gamestore@gmail.com", "GameStore123"),
+                    EnableSsl = true
+                };
+                client.Send("2016gamestore@gmail.com", "2016gamestore@gmail.com", "Nowa osoba do newslettera", 
+                    "Proszę mnie informować o tym, co nowego dzieje się w świecie gier na maila " + email + ". Z góry dziękuję.");
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
