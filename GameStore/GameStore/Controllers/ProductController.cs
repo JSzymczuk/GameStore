@@ -12,6 +12,7 @@ namespace GameStore.Controllers
 {
     public class ProductController : Controller
     {
+        public OpinionManager OpinionManager { get; private set; }
         public ProductManager ProductManager { get; private set; } 
         public PegiManager PegiManager { get; private set; } 
 
@@ -20,6 +21,7 @@ namespace GameStore.Controllers
             GameStoreDbContext context = new GameStoreDbContext();
             ProductManager = new ProductManager(context);
             PegiManager = new PegiManager(context);
+            OpinionManager = new OpinionManager(context);
         }
 
         public ProductController(ProductManager productManager, PegiManager pegiManager)
@@ -34,6 +36,78 @@ namespace GameStore.Controllers
             var filter = CreateFilter(keyword, platformId, genreId, pegiId);
             ViewBag.Filter = filter;
             var model = SearchProducts(filter);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddComment(AddCommentViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                OpinionManager.CreateComment(new Comment
+                {
+                    Added = DateTime.Now,
+                    Content = model.Content,
+                    ProductId = model.ProductId,
+                    Title = model.Title,
+                    UserId = AccountHelper.GetLoggedUserId()
+                });
+                OpinionManager.Save();
+            }
+            return RedirectToAction("ProductDetails", model.ProductId);
+        }
+
+        public ActionResult DeleteComment(Guid Id, Guid ProductId)
+        {
+            OpinionManager.DeleteComment(Id);
+            OpinionManager.Save();
+
+            return RedirectToAction("ProductDetails", ProductId);
+        }
+
+        public ActionResult ProductDetails(Guid Id)
+        {
+            var product = ProductManager.Products.FirstOrDefault(x => x.Id == Id);
+            var productViewModel = new ProductDetailsModel
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Publisher = product.Publisher,
+                Description = product.Description,
+                CoverList = product.CoverList,
+                ReleaseDate = product.ReleaseDate,
+                Language = product.Language,
+                DiscountPriceZl = product.DiscountPrice.HasValue ? (int)product.DiscountPrice.Value : (int)product.BasePrice,
+                Rating = product.Rating,
+                BasePriceZl = (int)product.BasePrice,
+                IsDiscounted = product.DiscountPrice.HasValue,
+                Price = product.DiscountPrice.HasValue ? product.DiscountPrice.Value : product.BasePrice,
+                Available = product.Remaining > 0,
+                GenreName = product.Genre.Name,
+                GenreId = product.GenreId,
+                PlatformName = product.Platform.Name,
+                PlatformId = product.PlatformId,
+                CommentsCount = product.Comments.Count,
+                VotesCount = product.Rates.Count,
+                ReleaseDateString = product.ReleaseDate.ToDisplayableDate(),
+                PegiID = product.PegiRatingId
+            };
+            productViewModel.BasePriceGr = product.BasePrice.ToString().Split('.')[1];
+
+            var comments = OpinionManager.Comments.Where(x => x.ProductId == product.Id).ToList();
+
+            var addComment = new AddCommentViewModel
+            {
+                ProductId = product.Id
+            };
+
+            var model = new DetailsViewModel
+            {
+                Product = productViewModel,
+                Comments = comments,
+                AddComment = addComment
+            };
+
             return View(model);
         }
 

@@ -68,6 +68,37 @@ namespace GameStore.ViewModels
         }
     }
 
+    public class ProductDetailsModel
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Publisher { get; set; }
+        public string Description { get; set; }
+        public string CoverList { get; set; }
+        public decimal Price { get; set; }
+        public int BasePriceZl { get; set; }
+        public string BasePriceGr { get; set; }
+        public bool IsDiscounted { get; set; }
+        public int DiscountPriceZl { get; set; }
+        public string DiscountPriceGr { get; set; }
+        public DateTime ReleaseDate { get; set; }
+        public string ReleaseDateString { get; set; }
+        public string Language { get; set; }
+        public decimal Rating { get; set; }
+        public int CommentsCount { get; set; }
+        public int VotesCount { get; set; }
+        public int DiscountPercentage { get; set; }
+        public bool Available { get; set; }
+        public string GenreName { get; set; }
+        public Guid GenreId { get; set; }
+        public string PlatformName { get; set; }
+        public string ReqMinimal { get; set; }
+        public string ReqRecommended { get; set; }
+        public Guid PlatformId { get; set; }
+
+        public Guid PegiID { get; set; }
+    }
+
     public class ProductListItem
     {
         public Guid Id { get; set; }
@@ -92,6 +123,7 @@ namespace GameStore.ViewModels
         public string GenreName { get; set; }
         public Guid GenreId { get; set; }
         public string PlatformName { get; set; }
+        
         public Guid PlatformId { get; set; }
 
         public Guid PegiID { get; set; }

@@ -1,0 +1,40 @@
+﻿@model List<GameStore.ViewModels.ProductListItem>
+
+<div class="main-section" id="top-10">
+    <h2>Najwyżej ocenione gry</h2>
+    <ol>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            var temp = i + 1;
+            <li>
+                <div class="top-10-list-number"><span class="number">@temp</span></div>
+                <div class="top-10-list-info">
+                    <a href='@Url.Action("ProductDetails", "Product", new { Id = Model[i].Id })' class="title-wrapper">
+                        <h3>@Model[i].Name</h3>
+                    </a>
+                    <div class="sub-info">
+                        <div class="product-additional-info">Platforma: @Model[i].PlatformName</div>
+                        <div class="rating-stars">
+                            <div class="rating-stars-result" style="width: 70px;"></div>
+                            <a href="" class="rate-star"></a>
+                            <a href="" class="rate-star"></a>
+                            <a href="" class="rate-star"></a>
+                            <a href="" class="rate-star"></a>
+                            <a href="" class="rate-star"></a>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="product-price">
+                            <span class="price-main">@Model[i].BasePriceZl</span>
+                            <span class="price-sub">
+                                <span class="price-grosze">@Model[i].BasePriceGr</span>
+                                <span class="price-currency">zł</span>
+                            </span>
+                        </div>
+                        <div class="add-to-cart"></div>
+                    </div>
+                </div>
+            </li>
+        }
+    </ol>
+</div>

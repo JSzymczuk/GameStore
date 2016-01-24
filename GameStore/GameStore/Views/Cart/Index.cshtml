@@ -11,7 +11,7 @@
             @Html.Partial("_CartMenu")
         </div>
         <div class="column">
-            <div class="general-form">
+            <div class="general-form" style="float: right; width: 100%;">
                 <h2>@ViewBag.Title</h2>
 
                 <table class="table-list">
@@ -56,8 +56,10 @@
                         </tr>
                     </tbody>
                 </table>
+
+                <button id="make-order-button" class="form-input" type="submit">Złóż zamówienie</button>
             </div>
-            <button id="make-order-button" class="form-input" type="submit">Złóż zamówienie</button>
+            
         </div>
     </div>
 
