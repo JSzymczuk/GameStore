@@ -1,50 +1,59 @@
 ﻿@model GameStore.ViewModels.PegiContentViewModel
 
 @{
-    ViewBag.Title = "Dodaj treść";
+    ViewBag.Title = "Dodaj zawartość pegi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
-
-@using (Html.BeginForm("CreateContent", "Pegi", null, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+<main>
+    <div class="wrapper">
+        <div class="column">
+            @Html.Partial("~/Views/Shared/_AdminMenu.cshtml")
         </div>
+        <div class="column" style="float: left; margin-left: 50px;">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
+            @using (Html.BeginForm("CreateContent", "Pegi", FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
+            {
+                <h2>Dodaj zawartość pegi</h2>
+                @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IconLink, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IconLink, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IconLink, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Name, htmlAttributes: new { @class = "form-input" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Description, htmlAttributes: new { @class = "form-input" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.IconLink, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.IconLink, htmlAttributes: new { @class = "form-label" })
+                        <div class="file-upload-custom">
+                            <input id="file-input-display" class="form-input" placeholder="Wybierz plik" disabled="disabled" />
+                            <div class="file-upload-button">
+                                <span>Wybierz</span>
+                                @Html.TextBoxFor(model => model.IconLink, new { @id = "file-upload-file", @type = "file" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+                <button class="form-input" type="submit">Dodaj</button>
+            }
         </div>
     </div>
-}
+</main>
 
-<div>
-    @Html.ActionLink("Powrót", "Index")
-</div>
+<script>
+    document.getElementById("file-upload-file").onchange = function () {
+        document.getElementById("file-input-display").value = this.value;
+    };
+</script>

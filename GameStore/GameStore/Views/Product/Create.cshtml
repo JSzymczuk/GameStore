@@ -4,15 +4,13 @@
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryval")
 
 <main>
     <div class="wrapper">
         <div class="column">
             @Html.Partial("~/Views/Shared/_AdminMenu.cshtml")
         </div>
-        <div class="column">
+        <div class="column" style="float: left; margin-left: 50px;">
 
 @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
 {
@@ -130,7 +128,7 @@
             <div class="file-upload-custom">
                 <input id="file-input-display" class="form-input" placeholder="Wybierz plik" disabled="disabled" />
                 <div class="file-upload-button">
-                    <span>Wyślij</span> 
+                    <span>Wybierz</span> 
                     @Html.TextBoxFor(model => model.CoverLarge, new { @id = "file-upload-file", @type="file" })
                 </div>
             </div>

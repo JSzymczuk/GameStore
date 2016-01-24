@@ -1,15 +1,8 @@
 ﻿<ul class="side-menu">
     <li><h3>Panel administratora</h3></li>
-    <li><a href="">Dodaj produkt</a></li>
-    <li><a href="">Zarządzaj produktami</a></li>
-    <li><a href="">Zarządzaj użytkownikami</a></li>
-    <li><a href="">Zarządzaj kategoriami</a></li>
-    <li><a href="">Zarządzaj rodzajami</a></li>
-    <li><a href="">Zarządzaj zamówieniami</a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
-    <li><a href=""></a></li>
+    <li><a href='@Url.Action("Create", "Product")'>Dodaj produkt</a></li>
+    <li><a href='@Url.Action("Create", "Category")'>Dodaj kategorię</a></li>
+    <li><a href='@Url.Action("Create", "Genre")'>Dodaj gatunek</a></li>
+    <li><a href='@Url.Action("CreateRating", "Pegi")'>Dodaj ocenę wiekową</a></li>
+    <li><a href='@Url.Action("CreateContent", "Pegi")'>Dodaj treść</a></li>
 </ul>
