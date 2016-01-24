@@ -73,7 +73,7 @@ namespace GameStore.Controllers
             return cart;
         }
 
-        public PartialViewResult AddProduct(Guid id)
+        public PartialViewResult AddProduct(Guid id, int quantity = 1)
         {
             HttpCookie cookie;
             var product = ProductManager.FindById(id);
@@ -82,8 +82,10 @@ namespace GameStore.Controllers
             var cartItem = new CartItemViewModel
             {
                 ProductId = id,
-                Quantity = 1,
+                Quantity = quantity,
                 ProductName = product.Name,
+                ProductLang = product.Language, 
+                ProductPublisher = product.Publisher,
                 ProductCover = product.CoverList,
                 PlatformName = product.Platform.Name, 
                 Price = price, 
@@ -113,7 +115,7 @@ namespace GameStore.Controllers
                     else
                     {
                         var increasedItem = cartItems.First(i => i.ProductId == id);
-                        increasedItem.Quantity++;
+                        increasedItem.Quantity += quantity;
                         increasedItem.TotalPrice += increasedItem.Price;
                     }
                     CookieHelper.UpdateCookie<List<CartItemViewModel>>(

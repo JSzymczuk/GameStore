@@ -1,14 +1,19 @@
 ﻿@if (Request.IsAuthenticated)
 {
-    <ul class="side-menu">
-        <li><h3>Konto użytkownika</h3></li>
-        <li><a href='@Url.Action("ChangePassword", "Manage")'>Zmiana hasła</a></li>
-        
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
-        {
-            @Html.AntiForgeryToken()
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
-        }
-    </ul>
+    <div class="side-menu">
+        <h2>Konto użytkownika</h2>
+        <ul>
+            <li><a href='@Url.Action("Index", "Cart")'>Mój koszyk</a></li>
+            <li><a href='@Url.Action("Index", "Order")'>Moje zamówienia</a></li>
+            <li><a href='@Url.Action("Addresses", "Account")'>Moje adresy</a></li>
+            <li><a href='@Url.Action("AddAddress", "Account")'>Nowy adres</a></li>
+            <li><a href='@Url.Action("ChangePassword", "Manage")'>Zmiana hasła</a></li>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+            }
+        </ul>
+    </div>
 }
 

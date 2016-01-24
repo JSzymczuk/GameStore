@@ -35,6 +35,10 @@ namespace GameStore.ViewModels
         [Required(ErrorMessage = "To pole nie może być puste.")]
         public string Name { get; set; }
 
+        [Display(Name = "Pozycja na liście")]
+        [Required(ErrorMessage = "To pole nie może być puste.")]
+        public int SortIndex { get; set; }
+
         [Display(Name = "Obrazek")]
         [DataType(DataType.Upload)]
         [Required(ErrorMessage = "To pole nie może być puste.")]
@@ -49,11 +53,11 @@ namespace GameStore.ViewModels
         public Guid Id { get; set; }
 
         [Display(Name = "Nazwa")]
-        [Required(ErrorMessage = "To pole nie może być puste.")]
         public string Name { get; set; }
 
+        public int SortIndex { get; set; }
+
         [Display(Name = "Obrazek")]
-        [Required(ErrorMessage = "To pole nie może być puste.")]
         public string IconLink { get; set; }
 
         [Display(Name = "Zawartość")]

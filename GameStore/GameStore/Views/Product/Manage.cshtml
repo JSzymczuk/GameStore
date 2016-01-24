@@ -1,0 +1,30 @@
+﻿@model IEnumerable<GameStore.ViewModels.ProductListItem>
+
+@{
+    ViewBag.Title = "Zarządzaj produktami";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+        @Html.Partial("~/Views/Shared/_AdminMenu.cshtml")
+        <div class="content">
+            <h2>@ViewBag.Title</h2>
+            
+            <table class="table-list">
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.ActionLink(string.Format("{0} ({1})", item.Name, item.PlatformName), "Details", new {@id = item.Id})</td>
+                            <td>Pozostało: @item.Remaining - @Html.ActionLink("Zwiększ", "Increase", new { @id = item.Id})</td>
+                            <td>@Html.ActionLink("Zarządzaj galerią", "ManageImages", new { @id = item.Id })</td>
+                            <td>@Html.ActionLink("Edytuj", "Update", new { @id = item.Id })</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>

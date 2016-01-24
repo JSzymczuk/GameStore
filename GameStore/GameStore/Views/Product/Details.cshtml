@@ -1,0 +1,216 @@
+﻿@model GameStore.ViewModels.ProductDetailsModel
+
+@{
+    ViewBag.Title = "Strona produktu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header></header>
+<main>
+    <div class="wrapper">
+        <div class="content single-column-content">
+            <section class="product-details">
+                <a href="" class="product-image-wrapper">
+                    <div class="image-tint background-white"></div>
+                    <img alt="Tekst alternatywny" src="@Model.CoverLarge" width="250" />
+                </a>
+                <div class="product-info">
+                    <h1>@Model.Name</h1>
+                    <div class="left">
+
+                        <div id="rating-box">
+                            @Html.Action("Rate", "Opinion", new { id = Model.Id })
+                        </div>
+
+                        <ul class="product-additional-info">
+                            <li><span class="title">Platforma:</span>@Model.PlatformName</li>
+                            <li><span class="title">Wydawca:</span>@Model.Publisher</li>
+                            <li><span class="title">Data premiery:</span>@Model.ReleaseDateString</li>
+                            <li><span class="title">Gatunek:</span>@Model.GenreName</li>
+                            <li><span class="title">Język:</span>@Model.Language</li>
+                        </ul>
+                    </div>
+                    <form id="order-product">
+                        @if(Model.Available)
+                        { 
+                            <span class="gray">Ilość: </span>
+                            <input class="text-input" type="number" min="0" max="100" step="1" value="2" />@Html.Raw("szt.")
+                        }
+                        else
+                        {
+                            <span class="gray">Ilość: </span>
+                            <span class="red">produkt niedostępny</span><br>
+                        }
+                        <span class="gray table-cell top-align">Cena: </span>
+                        <div class="price">
+                            <div class="product-price">
+                                <span class="price-main">@Model.DiscountPriceZl</span>
+                                <span class="price-sub">
+                                    <span class="price-grosze">@Model.DiscountPriceGr</span>
+                                    <span class="price-currency">zł</span>
+                                </span>
+                            </div>
+                            @if (Model.DiscountPriceZl != Model.BasePriceZl)
+                            {
+                                <span class="discount-old-price">@Model.BasePriceZl,@Model.BasePriceGr</span>
+                            }
+                        </div>
+
+                        <button class="add-to-cart" type="submit">Do koszyka</button>
+                    </form>
+                </div>
+            </section>
+
+            <article>
+                <section>
+                    <h2>Opis produktu</h2>
+                    <p>@Model.Description</p>
+                </section>
+            </article>
+
+            <section>
+                <h2>Wymagania sprzętowe</h2>
+                <div class="requirements">
+                    <div class="col-2">
+                        <h4>Minimalne:</h4>
+                        <p>@Model.ReqMinimal</p>
+                    </div>
+                    <div class="col-2">
+                        <h4>Zalecane:</h4>
+                        <p>@Model.ReqRecommended</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="no-border">Galeria</h2>
+                <section id="gallery" class="gallery gallery-wrapper">
+                    <div id="gallery-arrow-left" class="gallery-arrow">
+                        <div class="arrow"></div>
+                    </div>
+                    <div id="images-container" class="images-container">
+                        <a class="gallery-img" href="Images/Screenshots/screen1.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen1.jpg" alt="image-1" />
+                            </div>
+                        </a>
+
+                        <a class="gallery-img" href="Images/Screenshots/screen2.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen2.jpg" alt="image-2" />
+                            </div>
+                        </a>
+                        <a class="gallery-img" href="Images/Screenshots/screen3.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen3.jpg" alt="image-3" />
+                            </div>
+                        </a>
+                        <a class="gallery-img" href="Images/Screenshots/screen4.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen4.jpg" alt="image-4" />
+                            </div>
+                        </a>
+                        <a class="gallery-img" href="Images/Screenshots/screen5.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen5.jpg" alt="image-5" />
+                            </div>
+                        </a>
+                        <a class="gallery-img" href="Images/Screenshots/screen6.jpg" data-lightbox="screenshots-gallery">
+                            <div class="thumb-wrapper">
+                                <div class="image-tint background-white"></div>
+                                <img src="Images/Screenshots/screen6.jpg" alt="image-6" />
+                            </div>
+                        </a>
+                    </div>
+                    <div id="gallery-arrow-right" class="gallery-arrow">
+                        <div class="arrow"></div>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+                <script src="scripts/lightbox-plus-jquery.min.js"></script>
+            </section>
+
+            <section>
+                <h2>Komentarze</h2>
+
+                @Html.Action("AddComment", "Opinion", new { productId = Model.Id })
+                <div class="comment-options right-align">
+                    @if(Request.IsAuthenticated)
+                    { 
+                        <a id="add-comment-show">Dodaj komentarz</a>
+                    }
+                    else
+                    {
+                        <span class="gray">Zaloguj się, aby dodać komentarz</span>
+                    }
+                </div>
+                <div id="comments">
+                    @Html.Action("Comments", "Opinion", new { productid = Model.Id })
+                </div>
+
+            </section>
+        </div>
+    </div>
+</main>
+
+<script>
+    $("#add-comment-show").click(function () {
+        $("#add-comment").show();
+        $(this).hide();
+    });
+</script>
+
+<script>
+    var containerPosition = 0;
+    var minGalleryContainerPosition = $("#gallery").width() - $("#images-container").width() - 54;
+    var maxGalleryContainerPosition = 54;
+    var arrayLeft = $("#gallery-arrow-left");
+    var arrayRight = $("#gallery-arrow-right");
+    var galleryContainter = $("#images-container");
+    arrayLeft.mouseover(function () {
+        arrayLeft = setInterval(function () {
+            if (containerPosition < maxGalleryContainerPosition) {
+                containerPosition += 2;
+                galleryContainter.css("left", containerPosition);
+            }
+        }, 1);
+        return false;
+    });
+    arrayLeft.click(function () {
+        if (containerPosition < maxGalleryContainerPosition) {
+            containerPosition += 200;
+            if (containerPosition > maxGalleryContainerPosition) {
+                containerPosition = maxGalleryContainerPosition;
+            }
+            galleryContainter.css("left", containerPosition);
+        }
+    });
+    arrayRight.mouseover(function () {
+        arrayRight = setInterval(function () {
+            if (containerPosition > minGalleryContainerPosition) {
+                containerPosition -= 2;
+                galleryContainter.css("left", containerPosition);
+            }
+        }, 1);
+        return false;
+    });
+    arrayRight.click(function () {
+        if (containerPosition > minGalleryContainerPosition) {
+            containerPosition -= 200;
+            if (containerPosition < minGalleryContainerPosition) {
+                containerPosition = minGalleryContainerPosition;
+            }
+            galleryContainter.css("left", containerPosition);
+        }
+    });
+    $(document).mouseout(function () {
+        clearInterval(arrayLeft);
+        clearInterval(arrayRight);
+        return false;
+    });
+</script>

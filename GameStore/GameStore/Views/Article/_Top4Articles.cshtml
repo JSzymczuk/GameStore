@@ -1,0 +1,20 @@
+﻿@model IList<GameStore.ViewModels.ArticleViewModel>
+
+<div class="top-news">
+
+    @for (int i = 0; i < Model.Count && i < 4; i++)
+    {
+        <div class="news">
+            <div class="news-wrapper">
+                <div class="news-summary">
+                    <div class="title">
+                        <h3>@(Model[i].Title)</h3>
+                    </div>
+                    <p>@(Model[i].ShortInfo)</p>
+                    @Html.ActionLink("Czytaj więcej", "Details", "Article", new { @id = Model[i].Id }, new { @class = "read-more" })
+                </div>
+                <a href="link"><img alt="Tekst alternatywny" src="@Model[i].ImageThumb" /></a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,55 +1,82 @@
 ﻿@model GameStore.ViewModels.CartViewModel
 
 @{
-    AjaxOptions options = new AjaxOptions
+    var options = new AjaxOptions
     {
-        //HttpMethod = "Get",
+        HttpMethod = "Get",
         InsertionMode = InsertionMode.Replace,
-        //OnBegin = "$('#loading_modal').modal('show');",
-        //OnFailure = "$('#loading_modal').modal('hide');",
         UpdateTargetId = "cart-content"
     };
 }
 
-<table class="table">
-
-    @foreach (var item in Model.Products)
-    {
+<table class="table-list">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProductCover)
-            </td>
-            <td>
-                @Html.ActionLink(item.ProductName, "Page", "Product", new { id = item.ProductId })
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlatformName)
-            </td>
-            <td>
-                @Html.TextBoxFor(modelItem => item.Quantity, new
-                {
-                    @id = "quant-" + item.ProductId,
-                    @type = "number",
-                    @min = "0",
-                    @max = "1000",
-                    @step = "1",
-                    @onchange = "changeQuantity(this, '" + item.ProductId + "');"
-                }) szt.
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)zł
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)zł
-            </td>
-            <td>
-                @Ajax.ActionLink("Usuń", "RemoveProduct", "Cart", new { id = item.ProductId }, options)
-            </td>
+            <th style="width: 15%;"></th>
+            <th style="width: 40%;">Informacje o produkcie</th>
+            <th style="width: 15%;">Liczba sztuk</th>
+            <th style="width: 15%;">Cena detaliczna</th>
+            <th style="width: 15%;">Łączna cena</th>
         </tr>
-    }
+    </thead>
+    <tbody>
 
+        @if(Model.Products.Count > 0)
+        { 
+            foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        <a href="~/Views/Product/Details/@item.ProductId" class="product-image-wrapper">
+                            <div class="image-tint background-white"></div>
+                            <img alt="@item.ProductName" src="@item.ProductCover" height="153" width="108" />
+                        </a>
+                    </td>
+                    <td class="top-align">
+                        <a href="" class="title-wrapper">
+                            <h3>@item.ProductName</h3>
+                        </a>
+                        <div class="product-additional-info">
+                            Platforma: @item.PlatformName<br>
+                            Wydawca: @item.ProductPublisher<br>
+                            Język: @item.ProductLang
+                        </div>
+                        @Ajax.ActionLink("Usuń z koszyka", "RemoveProduct", "Cart", new { id = @item.ProductId }, options)
+                    </td>
+                    <td class="center-align">
+                        <input class="text-input" type="number" min="0" max="100" step="1" value="@item.Quantity" onchange="changeQuantity(this, '@item.ProductId');" />
+                    </td>
+                    <td class="center-align">
+                        <span class="gray">@item.Price</span>
+                    </td>
+                    <td class="center-align">
+                        <b>@item.TotalPrice</b>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="center-align" colspan="5">Koszyk jest pusty.</td></tr>
+        }
+
+    </tbody>
 </table>
 
-Razem @Html.DisplayFor(model => Model.TotalPrice)zł za @Html.DisplayFor(model => Model.TotalProducts) towarów.
+<h3 class="right-align" style="margin-top: 12px;">Razem: @(Model.TotalPrice)zł</h3>
 
-@Ajax.ActionLink("Wyczyść koszyk", "DestroyCart", options)
+@Html.ActionLink("Złóż zamówienie", "Create", "Order", null, new { @class = "cart-button", @id = "make-order-button", @type = "submit" })
+@Ajax.ActionLink("Wyczyść koszyk", "DestroyCart", "Cart", options, new { @class = "cart-button", @type = "submit" })
+
+<script>
+    function changeQuantity(sender, id) {
+        jQuery.ajax({
+            url: '@Url.Action("UpdateQuantity", "Cart")',
+            type: 'GET',
+            data: { productId: id, quantity: sender.value },
+            success: function (data, textStatus) {
+                $("#cart-content").html(data);
+            },
+        });
+    }
+</script>

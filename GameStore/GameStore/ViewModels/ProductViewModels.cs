@@ -8,29 +8,6 @@ using System.Web.Mvc;
 
 namespace GameStore.ViewModels
 {
-    /*
-     * public Guid Id { get; set; }
-        public String Name { get; set; }
-        public String Publisher { get; set; }
-        public String Description { get; set; }
-        public String ReqMinimal { get; set; }
-        public String ReqRecommended { get; set; }
-        public DateTime Released { get; set; }
-        public String Language { get; set; }
-        public Decimal Rating { get; set; }
-        public Decimal BasePrice { get; set; }
-        public Decimal? DiscountPrice { get; set; }
-        public String CoverLarge { get; set; }
-        public String CoverList { get; set; }
-        public String CoverThumb { get; set; }
-        public Int32 Remaining { get; set; }
-        public Boolean CollectorEdition { get; set; }
-
-        public Guid GenreId { get; set; }
-        public Guid PlatformId { get; set; }
-        public Guid PegiRatingId { get; set; }
-     */
-
     public enum ProductSortType
     {
         [Description("Nazwa rosnąco")]
@@ -59,6 +36,7 @@ namespace GameStore.ViewModels
         public List<SelectListItem> Platforms           { get; set; }
         public List<SelectListItem> Genres              { get; set; }
         public List<SelectListItem> PegiRatings         { get; set; }
+        public Boolean              ListDisplayMode     { get; set; }
 
         public ProductFilterModel()
         {
@@ -74,7 +52,7 @@ namespace GameStore.ViewModels
         public string Name { get; set; }
         public string Publisher { get; set; }
         public string Description { get; set; }
-        public string CoverList { get; set; }
+        public string CoverLarge { get; set; }
         public decimal Price { get; set; }
         public int BasePriceZl { get; set; }
         public string BasePriceGr { get; set; }
@@ -123,6 +101,7 @@ namespace GameStore.ViewModels
         public string GenreName { get; set; }
         public Guid GenreId { get; set; }
         public string PlatformName { get; set; }
+        public int Remaining { get; set; }
         
         public Guid PlatformId { get; set; }
 

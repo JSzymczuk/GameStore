@@ -1,0 +1,33 @@
+﻿@model GameStore.ViewModels.ArticleViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="side-menu">
+            <h2>Konto użytkownika</h2>
+            <ul>
+                <li><a href="">Strona główna</a></li>
+                <li><a href="">O sklepie</a></li>
+                <li><a href="">Wydarzenia bieżące</a></li>
+                <li><a href="">Kontakt</a></li>
+                <li><a href="">Regulamin</a></li>
+                <li><a href="">Polityka prywatności</a></li>
+                <li><a href="">Koszty wysyłki</a></li>
+                <li><a href="">Zwroty i reklamacje</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            <h2>@Model.Title</h2>
+            <div class="right gray">@Model.DateString</div>
+            <img alt="@Model.Id" src="@Model.Image" class="left"/>
+            <p>
+                @Model.Content
+            </p>
+            <div class="right">@Model.AuthorName</div>
+        </div>
+    </div>
+</main>

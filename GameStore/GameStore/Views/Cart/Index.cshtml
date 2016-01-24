@@ -1,82 +1,15 @@
 ﻿@{
     ViewBag.Title = "Mój koszyk";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-
-<link href="~/Content/new-styles.css" rel="stylesheet" />
-
 <main>
     <div class="wrapper">
-        <div class="column">
-            @Html.Partial("_CartMenu")
-        </div>
-        <div class="column">
-            <div class="general-form" style="float: right; width: 100%;">
-                <h2>@ViewBag.Title</h2>
-
-                <table class="table-list">
-                    <thead>
-                        <tr>
-                            <th style="width: 15%;"></th>
-                            <th style="width: 40%;">Informacje o produkcie</th>
-                            <th style="width: 15%;">Liczba sztuk</th>
-                            <th style="width: 15%;">Cena detaliczna</th>
-                            <th style="width: 15%;">Łączna cena</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!--tu bedzie foreach z rzedami od listy produktow do kupienia-->
-                        <tr>
-                            <td style="width: 15%;">
-                                <a href="Link do strony produktu" class="product-image-wrapper">
-                                    <div class="image-tint background-white"></div>
-                                    <img alt="Nazwa produktu" src="Images/product1-box.png" height="153" width="108" />
-                                </a>
-                            </td>
-                            <td style="width: 40%;" class="top-align">
-                                <a href="" class="title-wrapper">
-                                    <h3>The Elder Scrolls V: Skyrim Premium Edition</h3>
-                                </a>
-                                <div class="product-additional-info">
-                                    Platforma: PS3<br>
-                                    Wydawca: Ubisoft<br>
-                                    Język: polski (napisy)
-                                </div>
-                                <a href="">Usuń z koszyka</a>
-                            </td>
-                            <td style="width: 15%;" class="center-align">
-                                <input class="text-input" type="number" min="0" max="100" step="1" value="2" />
-                            </td>
-                            <td style="width: 15%;" class="center-align">
-                                <span class="gray">189,99zł</span>
-                            </td>
-                            <td style="width: 15%;" class="center-align">
-                                <b>379,98zł</b>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <button id="make-order-button" class="form-input" type="submit">Złóż zamówienie</button>
-            </div>
-            
+        @Html.Partial("~/Views/Shared/_UserMenu.cshtml")
+        <div class="content">
+            <h2>@ViewBag.Title</h2>
+            <div id="cart-content">
+                @Html.Action("GetCart")
+            </div>            
         </div>
     </div>
-
-    @*<div id="cart-content">
-        @Html.Action("GetCart")
-    </div>*@
 </main>
-
-<script>
-        function changeQuantity(sender, id) {
-            jQuery.ajax({
-                url: '@Url.Action("UpdateQuantity", "Cart")',
-                type: 'GET',
-                data: { productId: id, quantity: sender.value },
-                success: function (data, textStatus) {
-                    $("#cart-content").html(data);
-                },
-            });
-        }
-</script>

@@ -1,0 +1,65 @@
+﻿@model GameStore.ViewModels.ArticleCreateViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+            @Html.Partial("~/Views/Shared/_AdminMenu.cshtml")
+        <div class="content">
+
+            @using (Html.BeginForm("Create", "Article", FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
+            {
+                <h2>Dodaj artykuł</h2>
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "form-label" })
+                        @Html.TextBoxFor(model => model.Title, htmlAttributes: new { @class = "form-input" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ShortInfo, htmlAttributes: new { @class = "form-label" })
+                    @Html.ValidationMessageFor(model => model.ShortInfo, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.ShortInfo, htmlAttributes: new { @class = "form-input" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "form-label" })
+                    @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.Content, htmlAttributes: new { @class = "form-input" })
+                </div>
+
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "form-label" })
+                        <div class="file-upload-custom">
+                            <input id="file-input-display" class="form-input" placeholder="Wybierz plik" disabled="disabled" />
+                            <div class="file-upload-button">
+                                <span>Wybierz</span>
+                                @Html.TextBoxFor(model => model.Image, new { @id = "file-upload-file", @type = "file" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="form-input" type="submit">Dodaj</button>
+            }
+
+        </div>
+    </div>
+</main>
+
+<script>
+    document.getElementById("file-upload-file").onchange = function () {
+        document.getElementById("file-input-display").value = this.value;
+    };
+</script>

@@ -12,6 +12,7 @@ namespace GameStore.Entities
         public DbSet<Address>           Addresses           { get; set; }
         public DbSet<Article>           Articles            { get; set; }
         public DbSet<Comment>           Comments            { get; set; }
+        public DbSet<GalleryImage>      GalleryImages       { get; set; }
         public DbSet<GameGenre>         GameGenres          { get; set; }
         public DbSet<Order>             Orders              { get; set; }
         public DbSet<OrderedProduct>    OrderedProducts     { get; set; }

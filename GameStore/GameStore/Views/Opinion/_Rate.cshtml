@@ -1,0 +1,34 @@
+﻿@model GameStore.ViewModels.RateViewModel
+
+@{
+    AjaxOptions options = new AjaxOptions
+    {
+        UpdateTargetId = "rating-box",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "Get",
+    };
+}
+
+@Html.HiddenFor(model => Model.ProductId)
+<div class="product-rate">
+    <span class="rate">@Model.Rating</span>
+    <div class="inline-block">
+        <div class="rating-stars">
+            <div class="rating-stars-result"></div>
+            @for (int i = 1; i <= 5; i++)
+            {
+                @Ajax.ActionLink(" ", "Rate", "Opinion", new { id = Model.ProductId, rate = i }, options, new { @class = "rate-star" })
+            }
+        </div>
+        Oddanych głosów: @Model.VotesCount<br />
+        <span class="gray">@Model.Message</span>
+    </div>
+</div>
+<script>
+    $(".rating-stars").mousemove(function(e){
+        var sender = $(this);
+        var x = e.pageX - sender.offset().left;
+        sender.find(".rating-stars-result").css('width', x + 'px');
+    });
+</script>
+

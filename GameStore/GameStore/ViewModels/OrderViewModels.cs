@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace GameStore.ViewModels
 {
@@ -12,6 +13,8 @@ namespace GameStore.ViewModels
         public string ProductCover { get; set; }
         public string ProductName { get; set; }
         public string PlatformName { get; set; }
+        public string ProductPublisher { get; set; }
+        public string ProductLang { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public decimal TotalPrice { get; set; }
@@ -36,34 +39,41 @@ namespace GameStore.ViewModels
         Completed
     }
 
-    public class OrderListItem
-    {
-        [DisplayName("Numer")]
-        public Guid Id { get; set; }
-        [DisplayName("Opis")]
-        public string Description { get; set; }
-        [DisplayName("Złożono dnia")]
-        public DateTime OrderDate { get; set; }
-        [DisplayName("Kwota")]
-        public decimal TotalPrice { get; set; }
-        [DisplayName("Stan")]
-        public OrderStatus Status { get; set; }
-        [DisplayName("Uwagi")]
-        public String AdditionalInfo { get; set; }
-    }
-    
     public class OrderViewModel
     {
-        [DisplayName("Numer")]
+        [DisplayName("Numer zamówienia")]
         public Guid Id { get; set; }
         [DisplayName("Złożono dnia")]
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
+        [DisplayName("Nadano dnia")]
+        public string SentDate { get; set; }
         [DisplayName("Kwota")]
-        public decimal TotalPrice { get; set; }
+        public string TotalPrice { get; set; }
         [DisplayName("Stan")]
-        public OrderStatus Status { get; set; }
+        public string Status { get; set; }
         [DisplayName("Uwagi")]
         public String AdditionalInfo { get; set; }
+        [DisplayName("Adres dostawy")]
+        public string AddressString { get; set; }
+        public string UserId { get; set; }
+        public string UserEmail { get; set; }
+        public bool IsCancelled { get; set; }
+        public bool IsPaid { get; set; }
+        public bool IsSent { get; set; }
+        public bool CanBeSent { get; set; }
+        public bool CanBeCancelled { get; set; }
         public List<CartItemViewModel> Products { get; set; }
+    }
+
+    public class MakeOrderViewModel
+    {
+        public List<CartItemViewModel> Products { get; set; }
+        [DisplayName("Razem do zapłaty")]
+        public decimal TotalPrice { get; set; }
+        public SelectList Addresses { get; set; }
+        [DisplayName("Adres dostawy")]
+        public Guid SelectedAddress { get; set; }
+        [DisplayName("Uwagi do zamówienia")]
+        public String AdditionalInfo { get; set; }
     }
 }

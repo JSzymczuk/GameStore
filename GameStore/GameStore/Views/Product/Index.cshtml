@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GameStore.ViewModels.ProductListItem>
+﻿@model ICollection<GameStore.ViewModels.ProductListItem>
 
 @{
     ViewBag.Title = "Produkty";
@@ -19,10 +19,32 @@
 
         <div class="content product-seach">
             <h2>Wyszukiwanie produktów</h2>
+            <div class="select-display-type">
+                <a id="display-type-list"></a>
+                <a id="display-type-tiles"></a>
+            </div>
 
             <div id="search-results">
-                @Html.Partial("_SearchProductsResult", Model)
+                @Html.Partial("_SearchProductsResultTiles", Model)
             </div>
         </div>
     </div>
 </main>
+
+<script>
+    $("#display-type-tiles").click(function () {
+        var mode = $("#filter-display-mode");
+        if (mode.val() != "False") {
+            mode.val("False");
+            $("#search-filter-form").submit();
+        }
+    });
+
+    $("#display-type-list").click(function () {
+        var mode = $("#filter-display-mode");
+        if (mode.val() != "True") {
+            mode.val("True");
+            $("#search-filter-form").submit();
+        }
+    });
+</script>

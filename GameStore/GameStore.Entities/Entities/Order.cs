@@ -29,6 +29,7 @@ namespace GameStore.Entities
         public Guid Id { get; set; }
         public DateTime OrderDate { get; set; }
         public Boolean Paid { get; set; }
+        public Boolean IsDeleted { get; set; }
         public DateTime? BeginDate { get; set; }
         public DateTime? SentDate { get; set; }
         public String AdditionalInfo { get; set; }

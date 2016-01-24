@@ -1,0 +1,83 @@
+﻿@model GameStore.ViewModels.MakeOrderViewModel
+
+@{
+    ViewBag.Title = "Złóż zamówienie";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="side-menu">
+            @Html.Partial("_UserMenu")
+        </div>
+        <div class="content">
+            <h2>Złóż zamówienie</h2>
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;"></th>
+                        <th style="width: 40%;">Informacje o produkcie</th>
+                        <th style="width: 15%;">Liczba sztuk</th>
+                        <th style="width: 15%;">Cena detaliczna</th>
+                        <th style="width: 15%;">Łączna cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/Views/Product/Details/@item.ProductId" class="product-image-wrapper">
+                                    <div class="image-tint background-white"></div>
+                                    <img alt="@item.ProductName" src="@item.ProductCover" height="153" width="108" />
+                                </a>
+                            </td>
+                            <td class="top-align">
+                                <a href="" class="title-wrapper">
+                                    <h3>@item.ProductName</h3>
+                                </a>
+                                <div class="product-additional-info">
+                                    Platforma: @item.PlatformName<br>
+                                    Wydawca: @item.ProductPublisher<br>
+                                    Język: @item.ProductLang
+                                </div>
+                            </td>
+                            <td class="center-align">
+                                <span class="gray">@item.Quantity</span>
+                            </td>
+                            <td class="center-align">
+                                <span class="gray">@item.Price</span>
+                            </td>
+                            <td class="center-align">
+                                <b>@item.TotalPrice</b>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <h3 class="right-align" style="margin-top: 12px;">Razem: @(Model.TotalPrice)zł</h3>
+
+            @using (Html.BeginForm("Create", "Order", FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
+            {
+                <div class="form-group">
+                    @Html.ValidationMessageFor(model => model.SelectedAddress, "", new { @class = "text-danger" })
+                    <div class="form-input-group">
+                        @Html.LabelFor(model => model.SelectedAddress, htmlAttributes: new { @class = "form-label" })
+                        @Html.DropDownListFor(model => model.SelectedAddress, Model.Addresses, "--Wybierz adres--", new { @class = "form-input" })
+                        <span class="check-label"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AdditionalInfo, htmlAttributes: new { @class = "form-label" })
+                    @Html.ValidationMessageFor(model => model.AdditionalInfo, "", new { @class = "text-danger" })
+                    @Html.TextAreaFor(model => model.AdditionalInfo, htmlAttributes: new { @class = "form-input" })
+                </div>
+
+                <button class="cart-button" type="submit">Zatwierdź</button>
+            }
+
+        </div>
+    </div>
+</main>

@@ -1,0 +1,94 @@
+﻿@model GameStore.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "Szczegóły zamówienia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+        <div class="side-menu">
+            @Html.Partial("_UserMenu")
+        </div>
+        <div class="content">
+            <h2>Szczegóły zamówienia: @Model.Id</h2>
+
+            <div class="right-align">@Html.ActionLink("Powrót do zamówień", "Index")</div>
+
+            <table class="top-align" style="margin-bottom: 20px; border-spacing: 8px;">
+                <tr>
+                    <td class="right-align gray" style="width: 110px;">@Html.DisplayNameFor(modelItem => Model.Id):
+                    <td>@Html.DisplayFor(modelItem => Model.Id)
+                </tr>
+                <tr>
+                    <td class="right-align gray">@Html.DisplayNameFor(modelItem => Model.AddressString):
+                    <td>@Html.DisplayFor(modelItem => Model.AddressString)
+                </tr>
+                <tr>
+                    <td class="right-align gray">@Html.DisplayNameFor(modelItem => Model.AdditionalInfo):
+                    <td>@Html.DisplayFor(modelItem => Model.AdditionalInfo)
+                </tr>
+                <tr>
+                    <td class="right-align gray">@Html.DisplayNameFor(modelItem => Model.OrderDate):
+                    <td>@Html.DisplayFor(modelItem => Model.OrderDate)
+                </tr>
+                    @if (Model.IsSent)
+                    {
+                        <tr>
+                            <td class="right-align gray">@Html.DisplayNameFor(modelItem => Model.SentDate)@Html.Raw(":")
+                            <td>@Html.DisplayFor(modelItem => Model.SentDate)
+                        </tr>
+                    }
+                <tr>
+                    <td class="right-align gray">@Html.DisplayNameFor(modelItem => Model.Status):
+                    <td>@Html.DisplayFor(modelItem => Model.Status)
+                </tr>
+            </table>
+
+            <table class="table-list">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;"></th>
+                        <th style="width: 40%;">Informacje o produkcie</th>
+                        <th style="width: 15%;">Liczba sztuk</th>
+                        <th style="width: 15%;">Cena detaliczna</th>
+                        <th style="width: 15%;">Łączna cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/Views/Product/Details/@item.ProductId" class="product-image-wrapper">
+                                    <div class="image-tint background-white"></div>
+                                    <img alt="@item.ProductName" src="@item.ProductCover" height="153" width="108" />
+                                </a>
+                            </td>
+                            <td class="top-align">
+                                <a href="" class="title-wrapper">
+                                    <h3>@item.ProductName</h3>
+                                </a>
+                                <div class="product-additional-info">
+                                    Platforma: @item.PlatformName<br>
+                                    Wydawca: @item.ProductPublisher<br>
+                                    Język: @item.ProductLang
+                                </div>
+                            </td>
+                            <td class="center-align">
+                                <span class="gray">@item.Quantity</span>
+                            </td>
+                            <td class="center-align">
+                                <span class="gray">@item.Price</span>
+                            </td>
+                            <td class="center-align">
+                                <b>@item.TotalPrice</b>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <h3 class="right-align" style="margin-top: 12px;">Razem: @(Model.TotalPrice)</h3>
+        </div>
+    </div>
+</main>

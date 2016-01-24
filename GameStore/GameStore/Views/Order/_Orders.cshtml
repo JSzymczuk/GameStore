@@ -1,0 +1,78 @@
+﻿@model ICollection<GameStore.ViewModels.OrderViewModel>
+
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "my-orders"
+    };
+}
+
+<table class="table-list">
+    <thead>
+        <tr>
+            <th>Informacje o zamówieniu</th>
+            <th>Łączna kwota</th>
+            <th>Przebieg</th>
+            <th>Stan</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <b>@Html.DisplayNameFor(modelItem => item.Id):</b><br />
+                        @Html.DisplayFor(modelItem => item.Id) <br />
+
+                        <b>@Html.DisplayNameFor(modelItem => item.AddressString):</b><br />
+                        @Html.DisplayFor(modelItem => item.AddressString) <br />
+
+                        <b>@Html.DisplayNameFor(modelItem => item.AdditionalInfo):</b><br />
+                        @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                    </td>
+                    <td class="center-align">
+                        @Html.DisplayFor(modelItem => item.TotalPrice)
+                    </td>
+                    <td class="center-align">
+                        @Html.DisplayNameFor(modelItem => item.OrderDate):<br />
+                        @Html.DisplayFor(modelItem => item.OrderDate)<br />
+                        @if (item.IsSent)
+                        {
+                            @Html.DisplayNameFor(modelItem => item.SentDate)@Html.Raw(":")<br />
+                                @Html.DisplayFor(modelItem => item.SentDate)<br />
+                        }
+                    </td>
+                    <td class="center-align">
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td class="center-align">
+                        @Html.ActionLink("Szczegóły", "Details", new { @id = item.Id })
+                        @if(!item.IsCancelled)
+                        { 
+                            if (!item.IsPaid)
+                            {
+                                <br />
+                                @Ajax.ActionLink("Zapłać", "PayFor", new { @id = item.Id }, options)
+                            }
+                            if (item.CanBeCancelled)
+                            {
+                                <br />
+                                @Ajax.ActionLink("Anuluj zamówienie", "Cancel", new { @id = item.Id }, options)
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td class="center-align" colspan="5">Historia zamówień jest pusta</td></tr>
+        }
+    </tbody>
+</table>
+

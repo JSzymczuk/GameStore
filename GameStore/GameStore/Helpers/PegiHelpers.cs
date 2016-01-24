@@ -43,8 +43,9 @@ namespace GameStore.Helpers
             return new PegiRatingListItem
             {
                  Id = pegi.Id, 
-                 IconLink = pegi.IconLink, 
-                 Name = pegi.Name, 
+                 IconLink = pegi.IconLink,
+                 Name = pegi.Name,
+                 SortIndex = pegi.SortIndex,
                  Content = content, 
                  CanBeDeleted = pegi.Products.Count == 0
             };
@@ -63,7 +64,7 @@ namespace GameStore.Helpers
         public static List<PegiRatingListItem> ToListViewModel(this IEnumerable<PegiRating> rates)
         {
             var result = new List<PegiRatingListItem>();
-            foreach (var item in rates)
+            foreach (var item in rates.OrderBy(r => r.SortIndex))
             {
                 result.Add(item.ToListItem());
             }

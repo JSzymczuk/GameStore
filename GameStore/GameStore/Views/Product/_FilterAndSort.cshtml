@@ -10,9 +10,10 @@
         UpdateTargetId = "search-results",
         InsertionMode = InsertionMode.Replace
     },
-    new { @class = "form-condensed", role = "form" }))
+    new { @class = "form-condensed", role = "form", @id = "search-filter-form" }))
     {
         @Html.HiddenFor(model => Model.SearchKeyword, new { @id = "filter-search-keyword" })
+        @Html.HiddenFor(model => Model.ListDisplayMode, new { @id = "filter-display-mode"})
         
         <h3 class="no-border">Sortuj według</h3>
         

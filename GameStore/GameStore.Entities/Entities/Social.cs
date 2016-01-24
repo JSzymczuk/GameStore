@@ -16,13 +16,11 @@ namespace GameStore.Entities
         public DateTime Added { get; set; }
 
         public String UserId { get; set; }
-        public Guid ProductId { get; set; }
-        public Guid ArticleId { get; set; }
+        public Guid? ProductId { get; set; }
+        public Guid? ArticleId { get; set; }
 
         [ForeignKey("UserId")]
         public virtual AppUser User { get; set; }
-        [ForeignKey("ArticleId")]
-        public virtual Article Article { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
     }
@@ -40,22 +38,5 @@ namespace GameStore.Entities
         public virtual AppUser User { get; set; }
         [ForeignKey("ProductId")]
         public virtual Product Product { get; set; }
-    }
-
-    public class Article
-    {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid Id { get; set; }
-        public String Title { get; set; }
-        public String ShortInfo { get; set; }
-        public String Content { get; set; }
-        public DateTime Added { get; set; }
-
-        public String AuthorId { get; set; }
-
-        [ForeignKey("AuthorId")]
-        public virtual AppUser Author { get; set; }
-
-        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

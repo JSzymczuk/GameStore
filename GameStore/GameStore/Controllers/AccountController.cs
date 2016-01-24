@@ -179,7 +179,7 @@ namespace GameStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
+                var user = new AppUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -545,7 +545,7 @@ namespace GameStore.Controllers
                 AccountManager.CreateAddress(address);
                 AccountManager.Save();
 
-                return RedirectToAction("Addresses", AccountHelper.GetLoggedUserId());
+                return RedirectToAction("Addresses", new { userId = AccountHelper.GetLoggedUserId() });
             }
             ViewBag.Regions = GeneralHelper.SelectListForEnum<Region>(model.Region);
             return View(model);

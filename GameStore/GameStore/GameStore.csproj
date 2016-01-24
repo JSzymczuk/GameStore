@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.0.4\lib\net45\ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -160,12 +164,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\GenreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OpinionController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PegiController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,22 +181,27 @@
     <Compile Include="Helpers\AccountHelpers.cs" />
     <Compile Include="Helpers\CookieHelpers.cs" />
     <Compile Include="Helpers\GeneralHelpers.cs" />
+    <Compile Include="Helpers\OrderHelpers.cs" />
     <Compile Include="Helpers\PegiHelpers.cs" />
     <Compile Include="Helpers\ProductHelpers.cs" />
     <Compile Include="Managers\AccountManager.cs" />
+    <Compile Include="Managers\ArticleManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
+    <Compile Include="Managers\MultimediaManager.cs" />
     <Compile Include="Managers\OpinionManager.cs" />
+    <Compile Include="Managers\OrderManager.cs" />
     <Compile Include="Managers\PegiManager.cs" />
     <Compile Include="Managers\ProductManager.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="ViewModels\AccountViewModels2.cs" />
-    <Compile Include="ViewModels\AddCommentViewModel.cs" />
-    <Compile Include="ViewModels\DetailsViewModel.cs" />
+    <Compile Include="ViewModels\ArticleViewModels.cs" />
+    <Compile Include="ViewModels\GalleryViewModels.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\NotificationViewModel.cs" />
+    <Compile Include="ViewModels\OpinionViewModels.cs" />
     <Compile Include="ViewModels\OrderViewModels.cs" />
     <Compile Include="ViewModels\PegiViewModels.cs" />
     <Compile Include="ViewModels\ProductViewModels.cs" />
@@ -281,21 +293,37 @@
     <Content Include="Views\Product\Increase.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Shared\_AdminMenu.cshtml" />
-    <Content Include="Views\Product\_ProductSearchRow.cshtml" />
-    <Content Include="Views\Shared\_CartMenu.cshtml" />
     <Content Include="Views\Shared\_UserMenu.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
-    <Content Include="Views\Cart\MyOrder.cshtml" />
     <Content Include="Views\Product\_FilterAndSort.cshtml" />
     <Content Include="Views\Product\_SearchProductsResult.cshtml" />
     <Content Include="Views\Shared\_Nav.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
-    <Content Include="Views\Home\_PreOrders.cshtml" />
-    <Content Include="Views\Home\_Discount.cshtml" />
     <Content Include="Views\Home\_Top10.cshtml" />
-    <Content Include="Views\Product\ProductDetails.cshtml" />
-    <Content Include="Views\Product\_Comments.cshtml" />
-    <Content Include="Views\Product\_AddComment.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Opinion\_Comments.cshtml" />
+    <Content Include="Views\Opinion\_AddComment.cshtml" />
+    <Content Include="Views\Product\_ProductBox.cshtml" />
+    <Content Include="Views\Opinion\_Rate.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\_Orders.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Product\_SearchProductsResultTiles.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Article\_Top4Articles.cshtml" />
+    <Content Include="Views\Article\Details.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Product\ManageImages.cshtml" />
+    <Content Include="Views\Product\_ManageProductGallery.cshtml" />
+    <Content Include="Views\Product\Manage.cshtml" />
+    <Content Include="Views\Home\Complaints.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Home\Regulations.cshtml" />
+    <Content Include="Views\Home\ShippingCosts.cshtml" />
+    <Content Include="Views\Shared\_HelpMenu.cshtml" />
+    <Content Include="Views\Shared\_HomeMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

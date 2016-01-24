@@ -1,10 +1,12 @@
-﻿@model IEnumerable<GameStore.ViewModels.ProductListItem>
+﻿@model ICollection<GameStore.ViewModels.ProductListItem>
 
+@if(Model.Count > 0)
+{ 
 <ul class="table-list">
     @foreach (var item in Model)
     {
         <li class="table-list-item">
-            <a href="" class="product-image-wrapper">
+            <a href="Product/Details/@item.Id" class="product-image-wrapper">
                 @if (item.IsDiscounted)
                 {
                     <div class="product-discount">-@item.DiscountPercentage%</div>
@@ -14,7 +16,7 @@
             </a>
             <div class="product-info">
                 <div class="info-header">
-                    <a href="@item.Id" class="title-wrapper">
+                    <a href="Product/Details/@item.Id" class="title-wrapper">
                         <h3>@item.Name</h3>
                     </a>
                     <div class="product-price">
@@ -50,18 +52,18 @@
                 </div>
                 <div class="product-rate">
                     <div class="rating-stars">
-                        <div class="rating-stars-result"></div>
-                        <a href="" class="rate-star"></a>
-                        <a href="" class="rate-star"></a>
-                        <a href="" class="rate-star"></a>
-                        <a href="" class="rate-star"></a>
-                        <a href="" class="rate-star"></a>
+                        <div class="rating-stars-result" style="width: @((int)(item.Rating / 5.0M * 70))px;"></div>
                     </div>
                     Oddanych głosów: @item.VotesCount
                 </div>
-                <div class="add-to-cart">Do koszyka</div>
+                @Ajax.ActionLink("Do koszyka", "AddProduct", "Cart", new { @id = item.Id }, null, new { @class = "add-to-cart" })
             </div>
         </li>
     }
 </ul>
+}
+else
+{
+    <div class="center-align">Nie znaleziono produktów spełniających wyniki wyszukiwania.</div>
+}
 

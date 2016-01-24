@@ -1,0 +1,48 @@
+﻿@model GameStore.ViewModels.ProductListItem
+
+@{
+    int starsWidth = (int)(Model.Rating / 5.0M * 70);
+}
+
+<li class="product-box">
+    <a href='@Url.Action("Details", "Product", new { Id = Model.Id })' class="product-image-wrapper">
+        @if (Model.IsDiscounted)
+        { 
+            <div class="product-discount">-@Model.DiscountPercentage%</div>   
+        }
+        @if (Model.ReleaseDate > DateTime.Now)
+        {
+            <div class="product-release">Premiera: @Model.ReleaseDateString</div>
+        }
+        <div class="image-tint background-white"></div>
+        <img alt="Nazwa produktu" src="@Model.CoverList" height="255" width="180" />
+    </a>
+    <a href='@Url.Action("Details", "Product", new { Id = Model.Id })' class="title-wrapper">
+        <h3>@Model.Name</h3>
+    </a>
+    <div class="product-additional-info">Platforma: @Model.PlatformName</div>
+    <div class="rating-stars" >
+        <div class="rating-stars-result" style="width: @(starsWidth)px;"></div>
+    </div>
+    @if(Model.IsDiscounted)
+    { 
+        <div class="product-price">
+            <span class="price-main">@Model.DiscountPriceZl</span>
+            <span class="price-sub">
+                <span class="price-grosze">@Model.DiscountPriceGr</span>
+                <span class="price-currency">zł</span>
+            </span>
+        </div>
+    }
+    else
+    {
+        <div class="product-price">
+            <span class="price-main">@Model.BasePriceZl</span>
+            <span class="price-sub">
+                <span class="price-grosze">@Model.BasePriceGr</span>
+                <span class="price-currency">zł</span>
+            </span>
+        </div>
+    }
+    @Ajax.ActionLink(" ", "AddProduct", "Cart", new { @id = Model.Id }, null, new { @class = "add-to-cart" })
+</li>

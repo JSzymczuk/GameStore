@@ -25,6 +25,7 @@ namespace GameStore.Entities
         public Guid Id { get; set; }
         public String Name { get; set; }
         public String IconLink { get; set; }
+        public Int32 SortIndex { get; set; }
 
         public virtual ICollection<PegiContent> Content { get; set; }
         public virtual ICollection<Product> Products { get; set; }

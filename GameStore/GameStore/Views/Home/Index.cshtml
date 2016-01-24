@@ -14,17 +14,40 @@
     <span id="slider-next" class="slider-control"></span>
 </header>
 
-<main style="margin-top: 500px;">
+<main class="main-page-main">
     <div class="wrapper">
+        @Html.Action("Top4Articles", "Article")
         <div class="background-white">
             @Html.Partial("_Top10", Model.Top10)
             <div id="main-recommended">
-                @Html.Partial("_PreOrders", Model.PreOrders)
-                @Html.Partial("_Discount", Model.Discount)
+                <div class="main-section" id="main-preorder">
+                    <h2>Zamów przed premierą</h2>
+                    <ul>
+                        @foreach (var item in Model.PreOrders)
+                        { 
+                            @Html.Partial("../Product/_ProductBox", item)
+                        }
+                    </ul>
+                </div>
+                <div class="main-section" id="main-discount">
+                    <h2>Kup produkt w cenie promocyjnej</h2>
+                    <ul>
+                        @foreach (var item in Model.Discount)
+                        {
+                            @Html.Partial("../Product/_ProductBox", item)
+                        }
+                    </ul>
+                </div>
+                <div class="main-section" id="main-collector">
+                    <h2>Zaopatrz się w zestaw dla kolekcjonerów</h2>
+                    <ul>
+                        @foreach (var item in Model.Discount)
+                        {
+                            @Html.Partial("../Product/_ProductBox", item)
+                        }
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
 </main>
-
-
-

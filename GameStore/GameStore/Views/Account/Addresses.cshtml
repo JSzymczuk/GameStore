@@ -2,47 +2,56 @@
 
 @{
     ViewBag.Title = "Moje adresy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
+<main>
+    <div class="wrapper">
+        @Html.Partial("_UserMenu")
+        <div class="content">
+            <h2>@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Dodaj nowy", "AddAddress")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Adres
-        </th>
-        <th>
-            Dodatkowe operacje
-        </th>
-        <th></th>
-    </tr>
+            <div class="right-align">@Html.ActionLink("Dodaj nowy adres", "AddAddress", null, new { @style = "margin-bottom: 10px; display: block;" })</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Street)
-            @Html.Raw(" ")
-            @Html.DisplayFor(modelItem => item.House)
-            @Html.Raw("/")
-            @Html.DisplayFor(modelItem => item.Local)
-            @Html.Raw(" ")
-            @Html.DisplayFor(modelItem => item.City)
-            @Html.Raw(", ")
-            @Html.DisplayFor(modelItem => item.Region)
-            @Html.Raw(" ")
-            @Html.DisplayFor(modelItem => item.PostalCode)
-            @Html.Raw(" ")
-            @Html.DisplayFor(modelItem => item.Post)
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalInfo)
-        </td>
-        <td>
-            @Html.ActionLink("Usuń", "DeleteAddress", new { id=item.Id })
-        </td>
-    </tr>
-}
+            <table class="table-list">
+                <tr>
+                    <th>
+                        Adres
+                    </th>
+                    <th>
+                        Dodatkowe informacje
+                    </th>
+                    <th></th>
+                </tr>
 
-</table>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Street)
+                            @Html.Raw(" ")
+                            @Html.DisplayFor(modelItem => item.House)
+                            @Html.Raw("/")
+                            @Html.DisplayFor(modelItem => item.Local)
+                            @Html.Raw(" ")
+                            @Html.DisplayFor(modelItem => item.City)
+                            @Html.Raw(", ")
+                            @Html.DisplayFor(modelItem => item.Region)
+                            @Html.Raw(" ")
+                            @Html.DisplayFor(modelItem => item.PostalCode)
+                            @Html.Raw(" ")
+                            @Html.DisplayFor(modelItem => item.Post)
+                        <td class="center-align">
+                            @Html.DisplayFor(modelItem => item.AdditionalInfo)
+                        </td>
+                        <td class="center-align">
+                            @Html.ActionLink("Usuń", "DeleteAddress", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+
+        </div>
+    </div>
+</main>

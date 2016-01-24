@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -8,6 +9,8 @@ namespace GameStore.Entities
 {
     public class AppUser : IdentityUser
     {
+        public Boolean NewsletterEnrolled { get; set; }
+
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

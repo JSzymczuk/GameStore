@@ -6,21 +6,17 @@
         @for (int i = 0; i < Model.Count; i++)
         {
             var temp = i + 1;
+            int width = (int)(Model[i].Rating / 5.0M * 70);
             <li>
                 <div class="top-10-list-number"><span class="number">@temp</span></div>
                 <div class="top-10-list-info">
-                    <a href='@Url.Action("ProductDetails", "Product", new { Id = Model[i].Id })' class="title-wrapper">
+                    <a href='@Url.Action("Details", "Product", new { Id = Model[i].Id })' class="title-wrapper">
                         <h3>@Model[i].Name</h3>
                     </a>
                     <div class="sub-info">
                         <div class="product-additional-info">Platforma: @Model[i].PlatformName</div>
                         <div class="rating-stars">
-                            <div class="rating-stars-result" style="width: 70px;"></div>
-                            <a href="" class="rate-star"></a>
-                            <a href="" class="rate-star"></a>
-                            <a href="" class="rate-star"></a>
-                            <a href="" class="rate-star"></a>
-                            <a href="" class="rate-star"></a>
+                            <div class="rating-stars-result" style="width: @(width)px;"></div>
                         </div>
                     </div>
                     <div class="right">

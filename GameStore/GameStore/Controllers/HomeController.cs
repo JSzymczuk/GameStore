@@ -109,18 +109,47 @@ namespace GameStore.Controllers
             return View(model);
         }
 
+        #region HomeMenu
+
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
+        public ActionResult Regulations()
+        {
+            return View();
+        }
+
+        public ActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region HelpMenu
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
+        public ActionResult ShippingCosts()
+        {
+            return View();
+        }
+
+        public ActionResult Complaints()
+        {
+            return View();
+        }
+        
+        #endregion
     }
 }

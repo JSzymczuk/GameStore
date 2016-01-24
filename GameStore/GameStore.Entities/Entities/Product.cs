@@ -40,6 +40,7 @@ namespace GameStore.Entities
         public virtual PegiRating PegiRating { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<GalleryImage> GalleryImages { get; set; }
         public virtual ICollection<Rating> Rates { get; set; }
         public virtual ICollection<OrderedProduct> OrderedProducts { get; set; }
     }

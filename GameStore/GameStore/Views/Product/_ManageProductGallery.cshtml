@@ -1,0 +1,58 @@
+﻿@model GameStore.ViewModels.ManageGalleryViewModel
+
+@{ 
+    var options = new AjaxOptions
+    { 
+        InsertionMode= InsertionMode.Replace,
+        HttpMethod = "Get",
+        UpdateTargetId = "gallery-content" 
+    };
+    var formOptions = new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "Post",
+        UpdateTargetId = "gallery-content"
+    };
+}
+
+<table>
+    <tbody>
+    @foreach (var img in Model.Images)
+    {
+        <tr>
+            <td><img alt="@img.Id" src="@img.ImageThumb"/></td>
+            <td>@img.ImageLocation</td>
+            <td>@Ajax.ActionLink("Usuń", "RemoveFromGallery", "Product", new { imageId = img.Id, productId = Model.ProductId }, options)</td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@using (Html.BeginForm("AddToGallery", "Product", new { }, FormMethod.Post, new { enctype = "multipart/form-data", role = "form", @class = "general-form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.ProductId)
+    
+    <div class="form-group">
+        @Html.ValidationMessageFor(model => Model.Image, "", new { @class = "text-danger" })
+        <div class="form-input-group">
+            @Html.LabelFor(model => Model.Image, htmlAttributes: new { @class = "form-label" })
+            <div class="file-upload-custom">
+                <input id="file-input-display" class="form-input" placeholder="Wybierz plik" disabled="disabled" />
+                <div class="file-upload-button">
+                    <span>Wybierz</span>
+                    @Html.TextBoxFor(model => Model.Image, new { @id = "file-upload-file", @type = "file" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="form-input" type="submit">Prześlij</button>
+}
+
+<script>
+    document.getElementById("file-upload-file").onchange = function () {
+        document.getElementById("file-input-display").value = this.value;
+    };
+</script>

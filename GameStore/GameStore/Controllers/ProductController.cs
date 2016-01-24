@@ -7,21 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ImageResizer;
+using System.IO;
 
 namespace GameStore.Controllers
 {
     public class ProductController : Controller
     {
-        public OpinionManager OpinionManager { get; private set; }
         public ProductManager ProductManager { get; private set; } 
-        public PegiManager PegiManager { get; private set; } 
+        public PegiManager PegiManager { get; private set; }
+        public MultimediaManager MultimediaManager { get; private set; }
 
         public ProductController()
         {
             GameStoreDbContext context = new GameStoreDbContext();
             ProductManager = new ProductManager(context);
             PegiManager = new PegiManager(context);
-            OpinionManager = new OpinionManager(context);
+            MultimediaManager = new MultimediaManager(context);
         }
 
         public ProductController(ProductManager productManager, PegiManager pegiManager)
@@ -39,47 +41,35 @@ namespace GameStore.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public ActionResult AddComment(AddCommentViewModel model)
+        public ActionResult Manage()
         {
-            if (ModelState.IsValid)
+            var model = new List<ProductListItem>();
+            foreach (var item in ProductManager.Products.ToList())
             {
-                OpinionManager.CreateComment(new Comment
-                {
-                    Added = DateTime.Now,
-                    Content = model.Content,
-                    ProductId = model.ProductId,
-                    Title = model.Title,
-                    UserId = AccountHelper.GetLoggedUserId()
-                });
-                OpinionManager.Save();
+                model.Add(item.ToListItem());
             }
-            return RedirectToAction("ProductDetails", model.ProductId);
+            return View(model);
         }
 
-        public ActionResult DeleteComment(Guid Id, Guid ProductId)
-        {
-            OpinionManager.DeleteComment(Id);
-            OpinionManager.Save();
-
-            return RedirectToAction("ProductDetails", ProductId);
-        }
-
-        public ActionResult ProductDetails(Guid Id)
+        public ActionResult Details(Guid Id)
         {
             var product = ProductManager.Products.FirstOrDefault(x => x.Id == Id);
+
+            int gr = (int)((product.BasePrice - (int)product.BasePrice) * 100);
+
             var productViewModel = new ProductDetailsModel
             {
                 Id = product.Id,
                 Name = product.Name,
                 Publisher = product.Publisher,
                 Description = product.Description,
-                CoverList = product.CoverList,
+                CoverLarge = product.CoverLarge,
                 ReleaseDate = product.ReleaseDate,
                 Language = product.Language,
                 DiscountPriceZl = product.DiscountPrice.HasValue ? (int)product.DiscountPrice.Value : (int)product.BasePrice,
                 Rating = product.Rating,
                 BasePriceZl = (int)product.BasePrice,
+                BasePriceGr = gr < 10 ? gr < 1 ? "00" : "0" + gr.ToString() : gr.ToString(),
                 IsDiscounted = product.DiscountPrice.HasValue,
                 Price = product.DiscountPrice.HasValue ? product.DiscountPrice.Value : product.BasePrice,
                 Available = product.Remaining > 0,
@@ -92,23 +82,17 @@ namespace GameStore.Controllers
                 ReleaseDateString = product.ReleaseDate.ToDisplayableDate(),
                 PegiID = product.PegiRatingId
             };
-            productViewModel.BasePriceGr = product.BasePrice.ToString().Split('.')[1];
 
-            var comments = OpinionManager.Comments.Where(x => x.ProductId == product.Id).ToList();
-
-            var addComment = new AddCommentViewModel
+            if (productViewModel.IsDiscounted)
             {
-                ProductId = product.Id
-            };
-
-            var model = new DetailsViewModel
-            {
-                Product = productViewModel,
-                Comments = comments,
-                AddComment = addComment
-            };
-
-            return View(model);
+                productViewModel.DiscountPercentage = product.DiscountPrice.HasValue ?
+                    (int)(100 - 100 * product.DiscountPrice.Value / product.BasePrice) : 0;
+                int dgr = (int)((product.DiscountPrice - (int)product.DiscountPrice) * 100);
+                productViewModel.DiscountPriceZl = (int)product.DiscountPrice;
+                productViewModel.DiscountPriceGr = dgr < 10 ? dgr < 1 ? "00" : "0" + dgr.ToString() : dgr.ToString();
+            }
+            
+            return View(productViewModel);
         }
 
         [HttpGet]
@@ -130,7 +114,7 @@ namespace GameStore.Controllers
             if (ModelState.IsValid)
             {
                 //dodaj domyslna okladke w razie nulla
-                UploadFile(model.CoverLarge);
+                SaveCover(model);
 
                 ProductManager.Create(model.ToProduct());
                 ProductManager.Save();
@@ -240,7 +224,14 @@ namespace GameStore.Controllers
         [HttpPost]
         public PartialViewResult Search(ProductFilterModel filter)
         {
-            return PartialView("_SearchProductsResult", SearchProducts(filter));
+            if (filter.ListDisplayMode)
+            {
+                return PartialView("_SearchProductsResult", SearchProducts(filter));
+            }
+            else
+            {
+                return PartialView("_SearchProductsResultTiles", SearchProducts(filter));
+            }
         }
 
         [NonAction]
@@ -270,7 +261,7 @@ namespace GameStore.Controllers
                     Selected = genre.Id == genreId
                 });
             }
-            foreach (var pegi in PegiManager.PegiRates.OrderBy(p => p.Name))
+            foreach (var pegi in PegiManager.PegiRates.OrderBy(p => p.SortIndex))
             {
                 filter.PegiRatings.Add(new SelectListItem
                 {
@@ -284,7 +275,7 @@ namespace GameStore.Controllers
         }
         
         [NonAction]
-        private IEnumerable<ProductListItem> SearchProducts(ProductFilterModel filter)
+        private ICollection<ProductListItem> SearchProducts(ProductFilterModel filter)
         {
             var products = new List<ProductListItem>();
 
@@ -314,9 +305,71 @@ namespace GameStore.Controllers
                 }
             }
 
-            return products.SortBy(filter.ProductSortType);
+            return products.SortBy(filter.ProductSortType).ToList();
         }
 
+        [HttpGet]
+        public ActionResult ManageImages(Guid id)
+        {
+            var product = ProductManager.FindById(id);
+            if (product != null)
+            {
+                string shortName = product.Platform.NameShort;
+                return View("ManageImages", new ProductGalleryViewModel 
+                {
+                    ProductId = id,
+                    ProductName = product.Name,
+                    ProductCategory = shortName
+                });
+            }
+            return RedirectToAction("Index");
+        }
+        
+        [HttpGet]
+        public PartialViewResult ManageProductGallery(Guid id)
+        {
+            return PartialView("_ManageProductGallery", new ManageGalleryViewModel
+            {
+                Images = GetProductImages(id),
+                ProductId = id
+            });
+        }
+
+        [NonAction]
+        private ICollection<GalleryImage> GetProductImages(Guid productId)
+        {
+            return MultimediaManager.GalleryImages.Where(img => img.ProductId == productId).ToList();
+        }
+
+        [HttpPost]
+        public ActionResult AddToGallery(CreateImageViewModel model)
+        {
+            if (SaveScreenshot(model))
+            {
+                var product = ProductManager.FindById(model.ProductId);
+                var img = new GalleryImage
+                {
+                    Product = product,
+                    ImageLocation = model.ImageUrl,
+                    ImageThumb = model.ImageThumbUrl
+                };
+                product.GalleryImages.Add(img);
+                MultimediaManager.Create(img);
+                MultimediaManager.Save();
+            }
+            return ManageImages(model.ProductId);
+        }
+
+        [HttpGet]
+        public PartialViewResult RemoveFromGallery(Guid productId, Guid imageId)
+        {
+            MultimediaManager.Delete(imageId);
+            MultimediaManager.Save();
+            return ManageProductGallery(productId);
+        }
+
+
+        /*
         private bool UploadFile(HttpPostedFileBase image)
         {
             var path = Server.MapPath("/Images/" + image.FileName);
@@ -329,6 +382,75 @@ namespace GameStore.Controllers
             {
                 return false;
             }
+        }*/
+
+        [NonAction]
+        private bool UploadImage(HttpPostedFileBase file, string fileName, string path, string options)
+        {
+            try
+            {
+                file.InputStream.Seek(0, SeekOrigin.Begin);
+                ImageBuilder.Current.Build(new ImageJob(
+                    file.InputStream, path + fileName, new Instructions(options), false, true));
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
+
+        [NonAction]
+        private bool SaveCover(ProductViewModel model)
+        {
+            var file = model.CoverLarge;
+
+            if (file == null) 
+            { 
+                return false; 
+            }
+
+            string fileName = Guid.NewGuid().ToString();
+            string path = Server.MapPath("~/Images/Covers/");
+            
+            if (!(UploadImage(file, fileName, path, "width=250&format=jpg")
+            && UploadImage(file, fileName, path + "List\\", "width=180&format=jpg")
+            && UploadImage(file, fileName, path + "Thumbs\\", "width=108&format=jpg"))) 
+            { 
+                return false; 
+            }
+
+            model.Url = path + fileName + ".jpg";
+            model.CoverList = path + "List\\" + fileName + ".jpg";
+            model.CoverThumb = path + "Thumbs\\" + fileName + ".jpg";
+
+            return true;
+        }
+
+        [NonAction]
+        private bool SaveScreenshot(CreateImageViewModel model)
+        {
+            var file = model.Image;
+
+            if (file == null)
+            {
+                return false;
+            }
+
+            string fileName = Guid.NewGuid().ToString();
+            string path = Server.MapPath("~/Images/Screenshots/");
+
+            if (!(UploadImage(file, fileName, path, "format=jpg")
+            && UploadImage(file, fileName, path + "Thumbs\\", "width=150&format=jpg")))
+            {
+                return false;
+            }
+
+            model.ImageUrl = path + fileName + ".jpg";
+            model.ImageThumbUrl = path + "Thumbs\\" + fileName + ".jpg";
+
+            return true;
+        }
+
     }
 }

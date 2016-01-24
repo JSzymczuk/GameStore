@@ -1,0 +1,18 @@
+﻿@model GameStore.ViewModels.ProductGalleryViewModel
+
+@{
+    ViewBag.Title = "Zarządzaj galerią: " + @Model.ProductName + "(" + @Model.ProductCategory + ")";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="wrapper">
+       <!--Html.Partial("~/Views/Shared/_AdminMenu.cshtml")--> 
+        <div class="content">
+            <h2>@ViewBag.Title</h2>
+            <div id="gallery-content">
+                @Html.Action("ManageProductGallery", "Product", new { @id = Model.ProductId })
+            </div>
+        </div>
+    </div>
+</main>

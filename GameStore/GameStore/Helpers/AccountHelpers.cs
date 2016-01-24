@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using System.Web.Mvc;
 
 namespace GameStore.Helpers
 {
@@ -68,6 +69,23 @@ namespace GameStore.Helpers
                 Street = address.Street,
                 UserId = address.UserId 
             };
+        }
+
+        public static string ToDisplayableString(this Address address)
+        {
+            return address.Street + " " + address.House + "/" 
+                + address.Local + " " + address.City + ", " + address.Region 
+                + " " + address.PostalCode + " " + address.Post;
+        }
+
+        public static SelectList GetUserAddressesSelectList(this AccountManager manager, string userId)
+        {
+            List<object> values = new List<object>();
+            foreach (var address in manager.GetUserAddresses(userId))
+            {
+                values.Add(new { Id = address.Id, Name = address.ToDisplayableString() });
+            }
+            return new SelectList(values, "Id", "Name");
         }
     }
 }
