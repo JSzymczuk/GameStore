@@ -6,7 +6,11 @@
     @foreach (var item in Model)
     {
         <li class="table-list-item">
+<<<<<<< HEAD
             <a href="Product/Details/@item.Id" class="product-image-wrapper">
+=======
+            <a href='@Url.Action("ProductDetails", "Product", new { Id = item.Id })' class="product-image-wrapper">
+>>>>>>> 4895d368d939e90ab40945faa072c2d914fb739b
                 @if (item.IsDiscounted)
                 {
                     <div class="product-discount">-@item.DiscountPercentage%</div>
@@ -16,7 +20,11 @@
             </a>
             <div class="product-info">
                 <div class="info-header">
+<<<<<<< HEAD
                     <a href="Product/Details/@item.Id" class="title-wrapper">
+=======
+                    <a href='@Url.Action("ProductDetails", "Product", new { Id = item.Id })' class="title-wrapper">
+>>>>>>> 4895d368d939e90ab40945faa072c2d914fb739b
                         <h3>@item.Name</h3>
                     </a>
                     <div class="product-price">

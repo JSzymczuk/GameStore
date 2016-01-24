@@ -300,6 +300,7 @@
     <Content Include="Views\Shared\_Nav.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\_Top10.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\Opinion\_Comments.cshtml" />
     <Content Include="Views\Opinion\_AddComment.cshtml" />
@@ -324,6 +325,18 @@
     <Content Include="Views\Home\ShippingCosts.cshtml" />
     <Content Include="Views\Shared\_HelpMenu.cshtml" />
     <Content Include="Views\Shared\_HomeMenu.cshtml" />
+=======
+    <Content Include="Views\Product\ProductDetails.cshtml" />
+    <Content Include="Views\Product\_Comments.cshtml" />
+    <Content Include="Views\Product\_AddComment.cshtml" />
+    <Content Include="Views\Home\Regulations.cshtml" />
+    <Content Include="Views\Home\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Shared\_HomeMenu.cshtml" />
+    <Content Include="Views\Shared\_HelpMenu.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\ShippingCosts.cshtml" />
+    <Content Include="Views\Home\Complaints.cshtml" />
+>>>>>>> 4895d368d939e90ab40945faa072c2d914fb739b
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
